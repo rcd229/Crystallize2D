@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 25c04d667cc654e729c388510eca52aa
+timeCreated: 1436471877
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - MaleHair1: {fileID: 11400000, guid: f496291f6efd94973b300c2ed7acccfe, type: 2}
+  - MaleHair2: {fileID: 11400000, guid: 252a9f367159e451f8a5a4ad55b1660f, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

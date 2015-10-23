@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c895d04c726894c8ba91a1d7a6a630ae
+timeCreated: 1436537596
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - FemaleHair1: {fileID: 11400000, guid: c15fe2c974a624c00a297291d87cd66f, type: 2}
+  - FemaleHair2: {fileID: 11400000, guid: a7f34f3de80874f08bcc19d61a15de2d, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

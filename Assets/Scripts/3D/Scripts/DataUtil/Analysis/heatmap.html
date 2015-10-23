@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<style>
+
+body {
+  position: relative;
+}
+
+svg,
+canvas {
+  position: absolute;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  display: none;
+}
+
+.legendText {
+    font-size:50px;
+    font-family:"Arial, sans-serif";
+    font-weight: bold;
+}
+
+</style>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script>
+
+var c_scale = .00002,
+    decimal_places = 5;
+var freqs = [0, c_scale, c_scale * 2, c_scale * 3, c_scale * 4, c_scale * 5, c_scale * 6];
+var colors = ["#000", "#0a0", "#6c0", "#ee0", "#eb4", "#eb9", "#fff"];
+var data = [{
+    color: colors[0],
+    label: freqs[0]
+  }, {
+    color: colors[1],
+    label: freqs[1]
+  },{
+    color: colors[2],
+    label: freqs[2]
+  },{
+    color: colors[3],
+    label: freqs[3]
+  },{
+    color: colors[4],
+    label: freqs[4]
+  },{
+    color: colors[5],
+    label: freqs[5]
+  },{
+    color: colors[6],
+    label: freqs[6]
+  },]
+
+d3.json("prob_positions.json", function(error, heatmap) {
+  if (error) throw error;
+
+  var dx = heatmap[0].length,
+      dy = heatmap.length;
+
+  var scale = 1
+
+  var width = dx * scale,
+      height = dy * scale;
+
+  // Fix the aspect ratio.
+  // var ka = dy / dx, kb = height / width;
+  // if (ka < kb) height = width * ka;
+  // else width = height / ka;
+
+  var x = d3.scale.linear()
+      .domain([0, dx])
+      .range([0, width]);
+
+  var y = d3.scale.linear()
+      .domain([0, dy])
+      .range([height, 0]);
+
+  var color = d3.scale.linear()
+      .domain(freqs)
+      .range(colors);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("top")
+      .ticks(20);
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("right");
+
+  d3.select("body").append("canvas")
+      .attr("width", dx)
+      .attr("height", dy)
+      .style("width", width + "px")
+      .style("height", height + "px")
+      .call(drawImage);
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .call(removeZero);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+      .call(removeZero);
+
+  // Compute the pixel colors; scaled by CSS.
+  function drawImage(canvas) {
+    var context = canvas.node().getContext("2d"),
+        image = context.createImageData(dx, dy);
+
+    for (var y = 0, p = -1; y < dy; ++y) {
+      for (var x = 0; x < dx; ++x) {
+        var c = d3.rgb(color(heatmap[y][x]));
+        image.data[++p] = c.r;
+        image.data[++p] = c.g;
+        image.data[++p] = c.b;
+        image.data[++p] = 255;
+      }
+    }
+
+    context.putImageData(image, 0, 0);
+  }
+
+  function removeZero(axis) {
+    axis.selectAll("g").filter(function(d) { return !d; }).remove();
+  }
+});
+
+
+
+
+var w = 500,
+    h = 50,
+    x = 675,
+    right_space = 70,
+    bottom_space = 50,
+    label_offset = 20,
+    line_offset = -25;
+
+  var svg = d3.select('body')
+    .append('svg')
+    .attr('width', w + x + right_space)
+    .attr('height', h + bottom_space);
+
+  var gradient = svg.append("svg:defs")
+  .append("svg:linearGradient")
+    .attr("id", "gradient")
+    .attr("x1", "0%")
+    // .attr("y1", "0%")
+    .attr("x2", "100%")
+    // .attr("y2", "100%")
+    .attr("spreadMethod", "pad");
+
+gradient.append("svg:stop")
+    .attr("offset", "0%")
+    .attr("stop-color", colors[0])
+    .attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+    .attr("offset", "17%")
+    .attr("stop-color", colors[1])
+    .attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+    .attr("offset", "33%")
+    .attr("stop-color", colors[2])
+    .attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+    .attr("offset", "50%")
+    .attr("stop-color", colors[3])
+    .attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+    .attr("offset", "67%")
+    .attr("stop-color", colors[4])
+    .attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+    .attr("offset", "83%")
+    .attr("stop-color", colors[5])
+    .attr("stop-opacity", 1);
+
+gradient.append("svg:stop")
+    .attr("offset", "100%")
+    .attr("stop-color", colors[6])
+    .attr("stop-opacity", 1);
+
+var rect = svg.append("svg:rect")
+    .attr("width", w)
+    .attr("height", h)
+    .style("fill", "url(#gradient)")
+    .attr("x", x);
+    
+  var g = svg.append('g')
+    .selectAll('.label')  
+    .data(data)
+    .enter();
+   
+  g.append('line')
+      .style('stroke', function(d) {
+        return d.color;
+      })
+      .style('stroke-width', 2)
+      .attr('transform',function(d,i){
+        return 'translate(' + x + ',' + (h + line_offset) + ')';
+      })
+      .attr('x1',function(d,i){
+        return xPos(i)
+      })
+      .attr('x2',function(d,i){
+        return xPos(i)
+      })
+      .attr('y1',function(d,i){
+        return h / 2;
+      })
+       .attr('y2',function(d,i){
+        return h
+      });
+
+  g.append('text')
+    .text(function(d){
+      return d.label.toFixed(decimal_places);
+    })
+    .attr('transform',function(d,i){
+      return 'translate(' + (xPos(i) + x + 5) + ',' + (h + label_offset) + ')';
+    })
+    
+  function xPos(i){
+    return (w / (data.length - 1)) * i;
+  }
+</script>
