@@ -59,13 +59,13 @@ public class TilePlacerUI2D : MonoBehaviour, ITemporaryUI<object, object> {
 
     public static void PlaceTile(SpriteLayer layer) {
         var mPos = GetMapPositionFromMousePosition();
-        TileMap2D.pathInstance.SetValue(mPos, 1);
+        //TileMap2D.pathInstance.SetValue(mPos, 1);
         TileResourceManager.Instance.AddTile(mPos);
     }
 
     public static void RemoveTile(SpriteLayer layer) {
         var mPos = GetMapPositionFromMousePosition();
-        TileMap2D.pathInstance.SetValue(mPos, 0);
+        //TileMap2D.pathInstance.SetValue(mPos, 0);
         TileResourceManager.Instance.RemoveTile(mPos);
     }
 

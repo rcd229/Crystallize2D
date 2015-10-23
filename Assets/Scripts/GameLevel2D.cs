@@ -1,0 +1,22 @@
+﻿using UnityEngine;
+using System;
+using System.Collections.Generic;
+using Util;
+
+public class GameLevel2D
+{
+    public static GameLevel2D DefaultLevel = new GameLevel2D("Default");
+    public static GameLevel2D TestLevel = new GameLevel2D("TestLevel");
+    public Dictionary<SpriteLayer,TileMap2D> layers;
+    public string levelname;
+    
+
+
+	public GameLevel2D (string levelname)
+	{
+        this.levelname = levelname;
+        layers = new Dictionary<SpriteLayer, TileMap2D>();
+        layers[SpriteLayer.Path] = new TileMap2D(SpriteLayer.Path, levelname);
+        layers[SpriteLayer.Environment] = new TileMap2D(SpriteLayer.Environment, levelname);     
+	}
+}

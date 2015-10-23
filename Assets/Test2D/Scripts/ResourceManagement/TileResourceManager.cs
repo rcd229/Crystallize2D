@@ -88,18 +88,18 @@ public class TileResourceManager  {
         newVisibleAreas.ExceptWith(keys);
 
         foreach (var key in newVisibleAreas) {
-            foreach (var p in TileMap2D.pathInstance.GetPositions(key)) {
+            /*foreach (var p in TileMap2D.pathInstance.GetPositions(key)) {
                 AddTile(p);
-            }
+            }*/
             yield return null;
         }
 
         foreach (var key in newVisibleAreas)
         {
-            foreach (var p in TileMap2D.envirInstance.GetPositions(key))
+            /*foreach (var p in TileMap2D.envirInstance.GetPositions(key))
             {
                 AddTile(p);
-            }
+            }*/
             yield return null;
         }
 

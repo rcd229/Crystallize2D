@@ -20,72 +20,23 @@ public class TileMap2D {
 
     public const int MapSize = 16;
 
-    static TileMap2D _pathInstance;
-    static TileMap2D _envirInstance;
-    //static TileMap2D _buildingInstance;
-
-    public static TileMap2D pathInstance {
-        get {
-            if (_pathInstance == null) {
-                _pathInstance = new TileMap2D();
-                _pathInstance.layer = SpriteLayer.Path;
-                _pathInstance.maps = MapLoader2D.LoadAll(_pathInstance.layer);
-            }
-            return _pathInstance;
-        }
-    }
-
-    public static TileMap2D envirInstance
-    {
-        get
-        {
-            if (_envirInstance == null)
-            {
-                _envirInstance = new TileMap2D();
-                _envirInstance.layer = SpriteLayer.Environment;
-                _envirInstance.maps = MapLoader2D.LoadAll(_envirInstance.layer);
-                
-            }
-            return _envirInstance;
-        }
-    }
-
-    /*public static TileMap2D buildingInstance
-    {
-        get
-        {
-            if (_buildingInstance == null)
-            {
-                _buildingInstance = new TileMap2D();
-                _buildingInstance.layer = SpriteLayer.Building;
-                _buildingInstance.maps = MapLoader2D.LoadAll(_buildingInstance.layer);
-
-            }
-            return _buildingInstance;
-        }
-    }*/
-
     public static Vector2int GetReducedPoint(Vector2int point) {
         return new Vector2int(Mathf.FloorToInt((float)point.x / MapSize), Mathf.FloorToInt((float)point.y / MapSize));
     }
 
     Dictionary<Vector2int, byte[]> maps = new Dictionary<Vector2int, byte[]>();
     public SpriteLayer layer;
+    public string levelname;
 
-    //public IEnumerable<Vector2int> GetPositions(Vector2int center, int radius) {
+    public TileMap2D()
+    {
+    }
 
-    //    foreach (var p in TileResourceManager.Instance.GetVisibleAreas()) {
-    //        var m = GetMapFromReducedPoint(p);
-    //        for (int i = 0; i < m.Length; i++) {
-    //            if (m[i] > 0) {
-    //                var x = i / MapSize;
-    //                var y = i - (x * MapSize);
-    //                positions.Add(MapSize * p + new Vector2int(x, y));
-    //            }
-    //        }
-    //    }
-    //    return positions;
-    //}
+    public TileMap2D (SpriteLayer ly, string ln) {
+            levelname = ln;
+            layer = ly;
+            maps = MapLoader2D.LoadAll(layer, levelname);
+    }
 
     public IEnumerable<Vector2int> GetPositions(Vector2int areaPosition) {
         var positions = new List<Vector2int>();
@@ -117,7 +68,7 @@ public class TileMap2D {
     public void SetValue(Vector2int position, byte value) {
         var map = GetMap(position);
         map[GetLocalPosition(position)] = value;
-        MapLoader2D.Save(GetReducedPoint(position), map, layer);
+        MapLoader2D.Save(GetReducedPoint(position), map, layer, levelname);
     }
 
     byte[] GetMap(Vector2int point) {
@@ -126,7 +77,7 @@ public class TileMap2D {
 
     byte[] GetMapFromReducedPoint(Vector2int reducedPoint) {
         if (!maps.ContainsKey(reducedPoint)) {
-            var m = MapLoader2D.Load(reducedPoint, layer);
+            var m = MapLoader2D.Load(reducedPoint, layer, levelname);
             if (m == null) {
                 maps[reducedPoint] = new byte[MapSize * MapSize];
                 var newMap = maps[reducedPoint];

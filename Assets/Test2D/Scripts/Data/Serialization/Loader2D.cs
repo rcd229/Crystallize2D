@@ -13,8 +13,7 @@ public class Loader2D {
         }
     }
 
-    public static string TileDirectoryPath(SpriteLayer layer) {
-        string levelname = Application.loadedLevelName;
+    public static string TileDirectoryPath(SpriteLayer layer, string levelname) {
         string path = Directory.GetParent(Application.dataPath) + "/CrystallizeData2D/" + levelname + "/" + layer + "/";
 
         if (!Directory.Exists(path))

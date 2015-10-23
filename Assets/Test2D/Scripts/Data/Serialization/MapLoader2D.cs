@@ -7,16 +7,16 @@ using Util;
 
 public class MapLoader2D : Loader2D {
 
-    public static void Save(Vector2int mapLocation, byte[] bytes, SpriteLayer layer) {
-        using (var writer = new StreamWriter(TileDirectoryPath(layer) + mapLocation.ToString())) {
+    public static void Save(Vector2int mapLocation, byte[] bytes, SpriteLayer layer, string levelname) {
+        using (var writer = new StreamWriter(TileDirectoryPath(layer, levelname) + mapLocation.ToString())) {
             writer.WriteLine(bytes.ConvertToHexString());
         }
     }
 
-    public static byte[] Load(Vector2int mapLocation, SpriteLayer layer) {
-        if (File.Exists(TileDirectoryPath(layer) + mapLocation)) {
+    public static byte[] Load(Vector2int mapLocation, SpriteLayer layer, string levelname) {
+        if (File.Exists(TileDirectoryPath(layer, levelname) + mapLocation)) {
             string s;
-            using (var reader = new StreamReader(TileDirectoryPath(layer) + mapLocation)) {
+            using (var reader = new StreamReader(TileDirectoryPath(layer, levelname) + mapLocation)) {
                 s = reader.ReadLine();
             }
             return s.ConvertHexToByteArray();
@@ -25,19 +25,19 @@ public class MapLoader2D : Loader2D {
         }
     }
 
-    public static Dictionary<Vector2int, byte[]> LoadAll(SpriteLayer l) {
+    public static Dictionary<Vector2int, byte[]> LoadAll(SpriteLayer l, string levelname) {
         //create dictionary for layer l
         var dict = new Dictionary<Vector2int, byte[]>();
 
         //load each tile in layer l and place in dictionary
 
-        foreach (var file in Directory.GetFiles(TileDirectoryPath(l))) {
+        foreach (var file in Directory.GetFiles(TileDirectoryPath(l, levelname))) {
             Debug.Log(l.ToString());
-            Debug.Log(TileDirectoryPath(l).ToString());
+            Debug.Log(TileDirectoryPath(l, levelname).ToString());
             var name = Path.GetFileName(file);
             var stringSplit = name.Replace("(", "").Replace(")", "").Split(',');
             var vec = new Vector2int(int.Parse(stringSplit[0]), int.Parse(stringSplit[1]));
-            dict[vec] = Load(vec, l);
+            dict[vec] = Load(vec, l, levelname);
         }
         return dict;
     }

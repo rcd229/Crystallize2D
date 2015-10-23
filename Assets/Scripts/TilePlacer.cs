@@ -8,43 +8,51 @@ public class TilePlacer : MonoBehaviour {
 
     public TileSpriteManager tileManager;
     private GameObject tile;
-    private int tileIndex;
-    private List<GameObject> pathList;
-    private List<GameObject> envirList;
+    private List<GameObject> pathList = new List<GameObject>();
+    private List<GameObject> envirList = new List<GameObject>();
     private int type;
     private SpriteLayer layer;
     private Rect tileRect;
+    private GameLevel2D currentLevel;
 
 
     // Use this for initialization
     void Start () {
+        LoadLevel(GameLevel2D.DefaultLevel);
+    }
 
-        tileIndex = 0;
-        pathList = new List<GameObject>();
-        envirList = new List<GameObject>();
+    void LoadLevel(GameLevel2D level)
+    {
+        pathList.DestroyAndClear();
+        envirList.DestroyAndClear();
+        currentLevel = level;
         type = 0;
         layer = (SpriteLayer)0;
         tileRect = new Rect(0, 0, 100, 100);
-        IEnumerable<TileObject> pathTiles = TileMap2D.pathInstance.GetTiles();
-        IEnumerable<TileObject> envirTiles = TileMap2D.envirInstance.GetTiles();
-        foreach (TileObject t in pathTiles)
+        foreach (var l in currentLevel.layers)
         {
-            if (t.type != 0)
+            foreach (var t in l.Value.GetTiles())
             {
-                var tileInstance = tileManager.GetInstance(t.type - 1, TileMap2D.pathInstance.layer, t.position.ToVector2());
-                pathList.Add(tileInstance);
-            }
-            
-        }
-        foreach (TileObject t in envirTiles)
-        {
-            if (t.type != 0)
-            {
-                var tileInstance = tileManager.GetInstance(t.type - 1, TileMap2D.envirInstance.layer, t.position.ToVector2());
-                envirList.Add(tileInstance);
-            }
+                if (t.type != 0)
+                {
 
+                    var tileInstance = tileManager.GetInstance(t.type - 1, l.Key, t.position.ToVector2());
+                    pathList.Add(tileInstance);
+                }
+            }
         }
+    }
+
+    void SwitchLevel()
+    {
+        if (currentLevel == GameLevel2D.DefaultLevel)
+        {
+            LoadLevel(GameLevel2D.TestLevel);
+        }
+        else
+        {
+            LoadLevel(GameLevel2D.DefaultLevel);
+        } 
     }
 
     // Update is called once per frame
@@ -69,11 +77,11 @@ public class TilePlacer : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             var tileInstance = tileManager.GetInstance(type, layer, mousePos);
-
-            TileMap2D.pathInstance.SetValue(Vector2int.FromVector2(mousePos), (byte)(type+1));
+            currentLevel.layers[layer].SetValue(Vector2int.FromVector2(mousePos), (byte)(type + 1));
 
             if (layer == SpriteLayer.Path)
             {
+               
                 pathList.Add(tileInstance);
             }
             else
@@ -93,16 +101,23 @@ public class TilePlacer : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(1))
         {
-            var p = pathList.Where(obj => obj.transform.position == mousePos).SingleOrDefault();
-            var e = pathList.Where(obj => obj.transform.position == mousePos).SingleOrDefault();
+            var p = pathList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+            var e = envirList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
             if (p != null) {
                 Destroy(p);
                 pathList.Remove(p);
+                currentLevel.layers[SpriteLayer.Path].SetValue(Vector2int.FromVector2(mousePos), 0);
             }
             if (e != null) {
                 Destroy(e);
-                envirList.Remove(e); 
+                envirList.Remove(e);
+                currentLevel.layers[SpriteLayer.Environment].SetValue(Vector2int.FromVector2(mousePos), 0);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            SwitchLevel();
         }
     }
 }
