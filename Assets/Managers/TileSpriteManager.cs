@@ -5,23 +5,27 @@ using UnityEngine;
 public enum SpriteLayer
 {
     Path = 0,
-    Environment = 1,
-    Player = 2
+    Building = 1,
+    Door = 2,
+    Environment = 3,
+    Player = 4
 }
 
 public class TileSpriteManager : MonoBehaviour
 {
     public GameObject prefab;
     private Sprite[] pathSprites;
-    //private Sprite[] buildingSprites;
+    private Sprite[] buildingSprites;
+    private Sprite[] doorSprites;
     private Sprite[] envirSprites;
-    
 
     void Awake()
     {
         pathSprites = (Sprite[])Resources.LoadAll<Sprite>("Path");
+        buildingSprites = (Sprite[])Resources.LoadAll<Sprite>("Building");
+        doorSprites = (Sprite[])Resources.LoadAll<Sprite>("Door");
         envirSprites = (Sprite[])Resources.LoadAll<Sprite>("Environment");
-        //buildingSprites = (Sprite[])Resources.LoadAll<Sprite>("Building");
+        
     }
 
     public Texture2D getTexture(int type, SpriteLayer layer)
@@ -29,6 +33,14 @@ public class TileSpriteManager : MonoBehaviour
         if (layer == SpriteLayer.Path)
         {
             return pathSprites[type].texture;
+        }
+        else if (layer == SpriteLayer.Building)
+        {
+            return buildingSprites[type].texture;
+        }
+        else if (layer == SpriteLayer.Door)
+        {
+            return doorSprites[type].texture;
         }
         else
         {
@@ -42,6 +54,14 @@ public class TileSpriteManager : MonoBehaviour
         if (layer == 0)
         {
             sprites = pathSprites;
+        }
+        else if (layer == 1)
+        {
+            sprites = buildingSprites;
+        }
+        else if (layer == 2)
+        {
+            sprites = doorSprites;
         }
         else
         {
@@ -67,9 +87,13 @@ public class TileSpriteManager : MonoBehaviour
         spriteInstance.transform.position = position;
 
         //add box collider if tile is in Environment layer so that player cannot walk over this tile
-        if ((int)layer == 1 || (int)layer == 2)
+        if (layer == SpriteLayer.Building || layer == SpriteLayer.Door || layer == SpriteLayer.Environment)
         {
             spriteInstance.AddComponent<BoxCollider2D>();
+            if (layer == SpriteLayer.Door)
+            {
+                //spriteInstance.AddComponent<Trigger2D>();
+            }
         }
 
         return spriteInstance;
@@ -81,6 +105,14 @@ public class TileSpriteManager : MonoBehaviour
         if (layer == 0)
         {
             return pathSprites.Length;
+        }
+        else if (layer == 1)
+        {
+            return buildingSprites.Length;
+        }
+        else if (layer == 2)
+        {
+            return doorSprites.Length;
         }
         else
         {

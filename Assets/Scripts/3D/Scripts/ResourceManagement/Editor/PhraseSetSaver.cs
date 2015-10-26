@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections;
 
-public class PhraseSetSaver : AssetModificationProcessor {
+public class PhraseSetSaver : UnityEditor.AssetModificationProcessor {
 
     public static string[] OnWillSaveAssets(string[] paths) {
         PhraseSetCollectionGameData.SaveAll();

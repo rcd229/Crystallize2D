@@ -17,6 +17,8 @@ public class GameLevel2D
         this.levelname = levelname;
         layers = new Dictionary<SpriteLayer, TileMap2D>();
         layers[SpriteLayer.Path] = new TileMap2D(SpriteLayer.Path, levelname);
+        layers[SpriteLayer.Building] = new TileMap2D(SpriteLayer.Building, levelname);
+        layers[SpriteLayer.Door] = new TileMap2D(SpriteLayer.Door, levelname);
         layers[SpriteLayer.Environment] = new TileMap2D(SpriteLayer.Environment, levelname);     
 	}
 }

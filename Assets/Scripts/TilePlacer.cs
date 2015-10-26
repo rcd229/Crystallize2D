@@ -9,10 +9,11 @@ public class TilePlacer : MonoBehaviour {
     public TileSpriteManager tileManager;
     private GameObject tile;
     private List<GameObject> pathList = new List<GameObject>();
+    private List<GameObject> buildingList = new List<GameObject>();
+    private List<GameObject> doorList = new List<GameObject>();
     private List<GameObject> envirList = new List<GameObject>();
     private int type;
     private SpriteLayer layer;
-    private Rect tileRect;
     private GameLevel2D currentLevel;
 
 
@@ -24,11 +25,12 @@ public class TilePlacer : MonoBehaviour {
     void LoadLevel(GameLevel2D level)
     {
         pathList.DestroyAndClear();
+        buildingList.DestroyAndClear();
+        doorList.DestroyAndClear();
         envirList.DestroyAndClear();
         currentLevel = level;
         type = 0;
         layer = (SpriteLayer)0;
-        tileRect = new Rect(0, 0, 100, 100);
         foreach (var l in currentLevel.layers)
         {
             foreach (var t in l.Value.GetTiles())
@@ -37,7 +39,10 @@ public class TilePlacer : MonoBehaviour {
                 {
 
                     var tileInstance = tileManager.GetInstance(t.type - 1, l.Key, t.position.ToVector2());
-                    pathList.Add(tileInstance);
+                    if (l.Value.layer == SpriteLayer.Path) { pathList.Add(tileInstance); }
+                    else if (l.Value.layer == SpriteLayer.Building) { buildingList.Add(tileInstance); }
+                    else if (l.Value.layer == SpriteLayer.Door) { doorList.Add(tileInstance); }
+                    else { envirList.Add(tileInstance); }
                 }
             }
         }
@@ -69,9 +74,6 @@ public class TilePlacer : MonoBehaviour {
         mousePos.x = Mathf.RoundToInt(mousePos.x);
         mousePos.y = Mathf.RoundToInt(mousePos.y);
 
-        var x = 11 + (int)mousePos.x;
-        var y = -(int)(mousePos.y) + 5;
-
         var tListLength = tileManager.GetListLength((int)layer);
 
         if (Input.GetMouseButtonDown(0))
@@ -84,6 +86,14 @@ public class TilePlacer : MonoBehaviour {
                
                 pathList.Add(tileInstance);
             }
+            else if (layer == SpriteLayer.Building)
+            {
+                buildingList.Add(tileInstance);
+            }
+            else if (layer == SpriteLayer.Door)
+            {
+                doorList.Add(tileInstance);
+            }
             else
             {
                 envirList.Add(tileInstance);
@@ -94,24 +104,58 @@ public class TilePlacer : MonoBehaviour {
             type = (type + 1) % tListLength;
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            type = (type - 1) % tListLength;
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
             type = 0;
-            layer = (SpriteLayer)(((int)layer + 1) % 3);
+            layer = (SpriteLayer)(((int)layer + 1) % 4);
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            var p = pathList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
-            var e = envirList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
-            if (p != null) {
-                Destroy(p);
-                pathList.Remove(p);
-                currentLevel.layers[SpriteLayer.Path].SetValue(Vector2int.FromVector2(mousePos), 0);
+            GameObject t;
+            if (layer == SpriteLayer.Path)
+            {
+                t = pathList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+                if (t != null)
+                {
+                    Destroy(t);
+                    pathList.Remove(t);
+                    currentLevel.layers[SpriteLayer.Path].SetValue(Vector2int.FromVector2(mousePos), 0);
+                }
             }
-            if (e != null) {
-                Destroy(e);
-                envirList.Remove(e);
-                currentLevel.layers[SpriteLayer.Environment].SetValue(Vector2int.FromVector2(mousePos), 0);
+            else if (layer == SpriteLayer.Building)
+            {
+                t = buildingList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+                if (t != null)
+                {
+                    Destroy(t);
+                    buildingList.Remove(t);
+                    currentLevel.layers[SpriteLayer.Building].SetValue(Vector2int.FromVector2(mousePos), 0);
+                }
+            }
+            else if (layer == SpriteLayer.Door)
+            {
+                t = doorList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+                if (t != null)
+                {
+                    Destroy(t);
+                    doorList.Remove(t);
+                    currentLevel.layers[SpriteLayer.Door].SetValue(Vector2int.FromVector2(mousePos), 0);
+                }
+            }
+            else
+            {
+                t = envirList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+                if (t != null)
+                {
+                    Destroy(t);
+                    envirList.Remove(t);
+                    currentLevel.layers[SpriteLayer.Environment].SetValue(Vector2int.FromVector2(mousePos), 0);
+                }
             }
         }
 

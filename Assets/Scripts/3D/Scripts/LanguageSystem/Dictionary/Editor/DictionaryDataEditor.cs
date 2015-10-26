@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class DictionaryDataEditor : AssetModificationProcessor {
+public class DictionaryDataEditor : UnityEditor.AssetModificationProcessor {
 		
 	static string[] OnWillSaveAssets(string[] assets){
 		DictionaryData.SaveInstance ();
