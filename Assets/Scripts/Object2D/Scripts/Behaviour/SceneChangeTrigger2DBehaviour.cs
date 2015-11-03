@@ -20,6 +20,7 @@ public class SceneChangeTrigger2DBehaviour : MonoBehaviour {
                 other.transform.position = (Vector2)target.Position;
             }
             // load the other scene here
+
         }
     }
 }
