@@ -15,7 +15,13 @@ public class TilePlacer : MonoBehaviour {
     private int type;
     private SpriteLayer layer;
     private GameLevel2D currentLevel;
+    public static TilePlacer placer;
 
+
+    void Awake()
+    {
+        placer = this;
+    }
 
     // Use this for initialization
     void Start () {
@@ -76,7 +82,7 @@ public class TilePlacer : MonoBehaviour {
 
         var tListLength = tileManager.GetListLength((int)layer);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !UIUtil.MouseOverUI())
         {
             var tileInstance = tileManager.GetInstance(type, layer, mousePos);
             currentLevel.layers[layer].SetValue(Vector2int.FromVector2(mousePos), (byte)(type + 1));
@@ -163,5 +169,15 @@ public class TilePlacer : MonoBehaviour {
         {
             SwitchLevel();
         }
+    }
+
+    public SpriteLayer getLayer()
+    {
+        return layer;
+    }
+
+    public void setType(int t)
+    {
+        type = t;
     }
 }

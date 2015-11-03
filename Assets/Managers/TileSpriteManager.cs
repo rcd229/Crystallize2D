@@ -50,6 +50,21 @@ public class TileSpriteManager : MonoBehaviour
 
     public Sprite GetSprite(int id, int layer) {
         Sprite sprite;
+        Sprite[] sprites = getAllSprites(layer);
+        if (id >=0 && id < sprites.Length) {
+            sprite = sprites[id];
+        }
+        else
+        {
+            Debug.Log("index out of range");
+            id = 0;
+            sprite = sprites[id];
+        }
+        return sprite;
+    }
+
+    public Sprite[] getAllSprites(int layer)
+    {
         Sprite[] sprites;
         if (layer == 0)
         {
@@ -67,16 +82,8 @@ public class TileSpriteManager : MonoBehaviour
         {
             sprites = envirSprites;
         }
-        if (id >=0 && id < sprites.Length) {
-            sprite = sprites[id];
-        }
-        else
-        {
-            Debug.Log("index out of range");
-            id = 0;
-            sprite = sprites[id];
-        }
-        return sprite;
+        return sprites;
+
     }
 
     public GameObject GetInstance(int type, SpriteLayer layer, Vector2 position)
@@ -92,7 +99,8 @@ public class TileSpriteManager : MonoBehaviour
             spriteInstance.AddComponent<BoxCollider2D>();
             if (layer == SpriteLayer.Door)
             {
-                //spriteInstance.AddComponent<Trigger2D>();
+                spriteInstance.GetComponent<BoxCollider2D>().isTrigger = true;
+                spriteInstance.AddComponent<Door2DTrigger>();
             }
         }
 
