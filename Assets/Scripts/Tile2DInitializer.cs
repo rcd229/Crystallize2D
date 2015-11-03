@@ -77,4 +77,49 @@ public class Tile2DInitializer : MonoBehaviour
 
     }
 
+    public void removeTileAtMousePos(Vector3 mousePos)
+    {
+        GameObject t;
+        if (layer == SpriteLayer.Path)
+        {
+            t = pathList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+            if (t != null)
+            {
+                Destroy(t);
+                pathList.Remove(t);
+                currentLevel.layers[SpriteLayer.Path].SetValue(Vector2int.FromVector2(mousePos), 0);
+            }
+        }
+        else if (layer == SpriteLayer.Building)
+        {
+            t = buildingList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+            if (t != null)
+            {
+                Destroy(t);
+                buildingList.Remove(t);
+                currentLevel.layers[SpriteLayer.Building].SetValue(Vector2int.FromVector2(mousePos), 0);
+            }
+        }
+        else if (layer == SpriteLayer.Door)
+        {
+            t = doorList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+            if (t != null)
+            {
+                Destroy(t);
+                doorList.Remove(t);
+                currentLevel.layers[SpriteLayer.Door].SetValue(Vector2int.FromVector2(mousePos), 0);
+            }
+        }
+        else
+        {
+            t = envirList.Where(obj => obj.transform.position == mousePos).FirstOrDefault();
+            if (t != null)
+            {
+                Destroy(t);
+                envirList.Remove(t);
+                currentLevel.layers[SpriteLayer.Environment].SetValue(Vector2int.FromVector2(mousePos), 0);
+            }
+        }
+    }
+
 }
