@@ -23,7 +23,7 @@ public class Object2DEditorControls: MonoBehaviour {
         instance.GetComponent<InputField>().onEndEdit.AddListener((s) => endEdit(s));
     }
 
-    public void AddDropDown(IEnumerable<object> values, int value, Action<int> onValueChanged) {
+    public void AddDropDown<T>(IEnumerable<T> values, int value, Action<int> onValueChanged) {
         var instance = GetInstance(dropdownPrefab);
         var dd = instance.GetComponent<Dropdown>();
         dd.options.Clear();

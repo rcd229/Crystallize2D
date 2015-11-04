@@ -9,12 +9,9 @@ public abstract class Object2DEditorBase : MonoBehaviour, IInitializable<Object2
 
     public void Initialize(Object2D obj) {
         Object = obj;
+        ConstructEditor();
     }
 
     public abstract void ConstructEditor();
 
-    // TODO: Complete the methods below
-    protected void AddSelector<T>(Func<T> get, Action<T> set, T[] available, string label = "") {
-        // TODO: construct the selector here
-    }
 }

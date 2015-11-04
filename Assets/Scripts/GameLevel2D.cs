@@ -10,7 +10,9 @@ public class GameLevel2D
     public Dictionary<SpriteLayer,TileMap2D> layers;
     public string levelname;
     
-
+    public static GameLevel2D[] GetAllLevels() {
+        return new GameLevel2D[] { DefaultLevel, TestLevel };
+    }
 
 	public GameLevel2D (string levelname)
 	{
