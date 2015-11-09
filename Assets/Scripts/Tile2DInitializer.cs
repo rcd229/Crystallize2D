@@ -1,5 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
+using Util;
+using System.Linq;
 
 public class Tile2DInitializer : MonoBehaviour
 {
@@ -28,7 +31,7 @@ public class Tile2DInitializer : MonoBehaviour
         LoadLevel(GameLevel2D.DefaultLevel);
     }
 
-    void LoadLevel(GameLevel2D level)
+    public void LoadLevel(GameLevel2D level)
     {
         pathList.DestroyAndClear();
         buildingList.DestroyAndClear();
@@ -52,7 +55,7 @@ public class Tile2DInitializer : MonoBehaviour
         }
     }
 
-    public void createTileAtMousePos(Vector3 mousepos, SpriteLayer layer, int type)
+    public void createTileAtMousePos(Vector3 mousePos, SpriteLayer layer, int type)
     {
         var tileInstance = tileManager.GetInstance(type, layer, mousePos);
         currentLevel.layers[layer].SetValue(Vector2int.FromVector2(mousePos), (byte)(type + 1));
@@ -77,7 +80,7 @@ public class Tile2DInitializer : MonoBehaviour
 
     }
 
-    public void removeTileAtMousePos(Vector3 mousePos)
+    public void removeTileAtMousePos(Vector3 mousePos, SpriteLayer layer)
     {
         GameObject t;
         if (layer == SpriteLayer.Path)

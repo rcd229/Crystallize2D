@@ -4,10 +4,10 @@ using System.Collections;
 public class PlayerMovement2D : MonoBehaviour {
 
     public float speed = 6f;
-    bool FacingDown = true;
-    bool FacingUp = false;
-    bool FacingLeft = false;
-    bool FacingRight = false;
+    //bool FacingDown = true;
+    //bool FacingUp = false;
+    //bool FacingLeft = false;
+    //bool FacingRight = false;
     Animator anim;
     Rigidbody2D player;
 

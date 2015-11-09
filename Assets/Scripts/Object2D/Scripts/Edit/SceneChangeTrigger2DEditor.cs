@@ -12,7 +12,7 @@ public class SceneChangeTrigger2DEditor : Object2DEditorBase {
         // if we want a reference to the typed Object2D, we need to cast it
         var o = (SceneChangeTrigger2D)Object;
         // TODO: the GetAllLevels method should be moved out of GameLevel2D and just check which folders exist in the data folder
-        var levels = GameLevel2D.GetAllLevels();
+        var levels = GameLevel2DLoader.GetAllLevels();
 
         // you can add whatever controls you want
         // currently, only DropDown, string inputs and buttons are implemented, 
