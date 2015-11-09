@@ -28,7 +28,7 @@ public class TilePlacerUI : MonoBehaviour {
         tilelist.DestroyAndClear();
         lastlayer = TilePlacer.placer.getLayer();
         var index = 0;
-        foreach (Sprite sprite in TilePlacer.placer.tileManager.getAllSprites((int)lastlayer))
+        foreach (Sprite sprite in TileSpriteManager.tileManager.getAllSprites((int)lastlayer))
         {
             var tile = Instantiate<GameObject>(tileprefab);
             tile.GetComponent<Image>().sprite = sprite;

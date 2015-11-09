@@ -18,9 +18,11 @@ public class TileSpriteManager : MonoBehaviour
     private Sprite[] buildingSprites;
     private Sprite[] doorSprites;
     private Sprite[] envirSprites;
+    public static TileSpriteManager tileManager;
 
     void Awake()
     {
+        tileManager = this;
         pathSprites = (Sprite[])Resources.LoadAll<Sprite>("Path");
         buildingSprites = (Sprite[])Resources.LoadAll<Sprite>("Building");
         doorSprites = (Sprite[])Resources.LoadAll<Sprite>("Door");
