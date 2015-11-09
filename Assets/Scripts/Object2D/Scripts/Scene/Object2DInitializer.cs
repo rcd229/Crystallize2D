@@ -5,6 +5,6 @@ using System.Collections.Generic;
 
 public class Object2DInitializer : MonoBehaviour {
     void Start() {
-        Object2DSceneResourceManager.Instance.LoadAll();
+        Object2DSceneResourceManager.Instance.LoadLevel(GameLevel2D.DefaultLevel);
     }
 }

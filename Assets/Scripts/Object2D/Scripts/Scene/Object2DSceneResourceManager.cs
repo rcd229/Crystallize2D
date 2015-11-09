@@ -30,6 +30,15 @@ public class Object2DSceneResourceManager : MonoBehaviour {
         return Resources.LoadAll<GameObject>(Object2DPrefabsDirectory);
     }
 
+    public void LoadLevel(GameLevel2D level) {
+        foreach(var r in resources.Values) {
+            Destroy(r);
+        }
+        resources = new Dictionary<Vector2int, GameObject>();
+
+        LoadAll(level.levelname);
+    }
+
     public void Create(Object2D obj) {
         Place(obj);
         Save(obj);
@@ -76,8 +85,8 @@ public class Object2DSceneResourceManager : MonoBehaviour {
         DeleteAt(obj.Position);
     }
 
-    public void LoadAll() {
-        var objects = Object2DLoader.LoadAll(_stage);
+    public void LoadAll(string level) {
+        var objects = Object2DLoader.LoadAll(level);
         foreach(var obj in objects) {
             Place(obj);
         }

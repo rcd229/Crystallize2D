@@ -127,7 +127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 884732527}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &218118784
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,49 +357,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1460032225}
-  - {fileID: 1080946405}
   - {fileID: 65935076}
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1 &1080946404
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1080946405}
-  - 114: {fileID: 1080946406}
-  m_Layer: 0
-  m_Name: ObjectInitializer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1080946405
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1080946404}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 884732527}
-  m_RootOrder: 1
---- !u!114 &1080946406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1080946404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca73aa452c1f2b44e9026a8b0b21ae3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1460032223
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +370,7 @@ GameObject:
   - 4: {fileID: 1460032225}
   - 114: {fileID: 1460032224}
   m_Layer: 0
-  m_Name: TileInitializer
+  m_Name: LevelInitializer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -424,7 +384,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1460032223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5fe7f2734ead7d4782782e4b023391e, type: 3}
+  m_Script: {fileID: 11500000, guid: b28a4f58dc987ee46b412700fc07c1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1460032225

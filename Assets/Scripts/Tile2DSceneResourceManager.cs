@@ -19,16 +19,7 @@ public class Tile2DSceneResourceManager : MonoBehaviour {
     }
 
     public void LoadLevel(GameLevel2D level) {
-        var c = 0;
-        foreach(var r in resources) {
-            Destroy(r);
-            c++;
-        }
-        Debug.Log("destroyed: " + c);
-        resources = new List<GameObject>();
-
-        //resources.DestroyAndClear();
-        Debug.Log("res length: " + resources.Count);
+        resources.DestroyAndClear();
         currentLevel = level;
         Debug.Log("current level: " + currentLevel.levelname);
         foreach (var l in currentLevel.layers) {
@@ -39,7 +30,6 @@ public class Tile2DSceneResourceManager : MonoBehaviour {
                 }
             }
         }
-        Debug.Log("Added: " + resources.Count);
     }
 
     public void createTileAtMousePos(Vector3 mousePos, SpriteLayer layer, int type) {
