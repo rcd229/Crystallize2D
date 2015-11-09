@@ -11,7 +11,7 @@ public class Object2DLoader {
     public static string LocalDirectoryPath { get { return "Object/"; } }
 
     static JsonSerializerSettings settings = new JsonSerializerSettings();
-    
+
     static Object2DLoader() {
         settings.TypeNameHandling = TypeNameHandling.All;
     }
@@ -43,8 +43,12 @@ public class Object2DLoader {
 
     public static List<Object2D> LoadAll(string stage) {
         var objects = new List<Object2D>();
-        foreach (var f in Directory.GetFiles(GetDirectoryPath(stage))) {
-            objects.Add(Load(f));
+
+        var dir = GetDirectoryPath(stage);
+        if (Directory.Exists(dir)) {
+            foreach (var f in Directory.GetFiles(dir)) {
+                objects.Add(Load(f));
+            }
         }
         return objects;
     }

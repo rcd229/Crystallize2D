@@ -14,4 +14,8 @@ public abstract class Object2DEditorBase : MonoBehaviour, IInitializable<Object2
 
     public abstract void ConstructEditor();
 
+    protected void Save() {
+        Object2DSceneResourceManager.Instance.Save(Object);
+    }
+
 }

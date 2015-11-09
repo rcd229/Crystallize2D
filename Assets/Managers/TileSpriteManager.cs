@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpriteLayer
-{
+public enum SpriteLayer {
     Path = 0,
     Building = 1,
     Door = 2,
@@ -11,53 +10,53 @@ public enum SpriteLayer
     Player = 4
 }
 
-public class TileSpriteManager : MonoBehaviour
-{
-    public GameObject prefab;
-    private Sprite[] pathSprites;
-    private Sprite[] buildingSprites;
-    private Sprite[] doorSprites;
-    private Sprite[] envirSprites;
-    public static TileSpriteManager tileManager;
-
-    void Awake()
-    {
-        tileManager = this;
-        pathSprites = (Sprite[])Resources.LoadAll<Sprite>("Path");
-        buildingSprites = (Sprite[])Resources.LoadAll<Sprite>("Building");
-        doorSprites = (Sprite[])Resources.LoadAll<Sprite>("Door");
-        envirSprites = (Sprite[])Resources.LoadAll<Sprite>("Environment");
-        
+public class TileSpriteManager : MonoBehaviour {
+    static TileSpriteManager _instance;
+    public static TileSpriteManager Instance {
+        get {
+            if (!_instance) {
+                _instance = new GameObject("TileSpriteManager").AddComponent<TileSpriteManager>();
+                _instance.prefab = Resources.Load<GameObject>("BaseTilePrefab");
+            }
+            return _instance;
+        }
     }
 
-    public Texture2D getTexture(int type, SpriteLayer layer)
-    {
-        if (layer == SpriteLayer.Path)
-        {
+    GameObject prefab;
+    Sprite[] pathSprites;
+    Sprite[] buildingSprites;
+    Sprite[] doorSprites;
+    Sprite[] envirSprites;
+
+    void Awake() {
+        pathSprites = Resources.LoadAll<Sprite>("Path");
+        buildingSprites = Resources.LoadAll<Sprite>("Building");
+        doorSprites = Resources.LoadAll<Sprite>("Door");
+        envirSprites = Resources.LoadAll<Sprite>("Environment");
+    }
+
+    public Texture2D GetTexture(int type, SpriteLayer layer) {
+        if (layer == SpriteLayer.Path) {
             return pathSprites[type].texture;
         }
-        else if (layer == SpriteLayer.Building)
-        {
+        else if (layer == SpriteLayer.Building) {
             return buildingSprites[type].texture;
         }
-        else if (layer == SpriteLayer.Door)
-        {
+        else if (layer == SpriteLayer.Door) {
             return doorSprites[type].texture;
         }
-        else
-        {
+        else {
             return envirSprites[type].texture;
         }
     }
 
     public Sprite GetSprite(int id, int layer) {
         Sprite sprite;
-        Sprite[] sprites = getAllSprites(layer);
-        if (id >=0 && id < sprites.Length) {
+        Sprite[] sprites = GetAllSprites(layer);
+        if (id >= 0 && id < sprites.Length) {
             sprite = sprites[id];
         }
-        else
-        {
+        else {
             Debug.Log("index out of range");
             id = 0;
             sprite = sprites[id];
@@ -65,67 +64,50 @@ public class TileSpriteManager : MonoBehaviour
         return sprite;
     }
 
-    public Sprite[] getAllSprites(int layer)
-    {
+    public Sprite[] GetAllSprites(int layer) {
         Sprite[] sprites;
-        if (layer == 0)
-        {
+        if (layer == 0) {
             sprites = pathSprites;
         }
-        else if (layer == 1)
-        {
+        else if (layer == 1) {
             sprites = buildingSprites;
         }
-        else if (layer == 2)
-        {
+        else if (layer == 2) {
             sprites = doorSprites;
         }
-        else
-        {
+        else {
             sprites = envirSprites;
         }
         return sprites;
 
     }
 
-    public GameObject GetInstance(int type, SpriteLayer layer, Vector2 position)
-    {
-        var spriteInstance = Instantiate<GameObject>(prefab);
-        spriteInstance.GetComponent<SpriteRenderer>().sprite = GetSprite(type, (int)layer);
-        spriteInstance.GetComponent<SpriteRenderer>().sortingLayerName = layer.ToString();
-        spriteInstance.transform.position = position;
+    public GameObject GetInstance(int type, SpriteLayer layer, Vector2 position) {
+        var tileInstance = Instantiate(prefab);
+        TransformPath.Add(tileInstance.transform, "Tiles");
+        tileInstance.GetComponent<SpriteRenderer>().sprite = GetSprite(type, (int)layer);
+        tileInstance.GetComponent<SpriteRenderer>().sortingLayerName = layer.ToString();
+        tileInstance.transform.position = position;
 
         //add box collider if tile is in Environment layer so that player cannot walk over this tile
-        if (layer == SpriteLayer.Building || layer == SpriteLayer.Door || layer == SpriteLayer.Environment)
-        {
-            spriteInstance.AddComponent<BoxCollider2D>();
-            if (layer == SpriteLayer.Door)
-            {
-                spriteInstance.GetComponent<BoxCollider2D>().isTrigger = true;
-                spriteInstance.AddComponent<Door2DTrigger>();
-            }
+        if (layer == SpriteLayer.Building || layer == SpriteLayer.Door || layer == SpriteLayer.Environment) {
+            tileInstance.AddComponent<BoxCollider2D>();
         }
 
-        return spriteInstance;
-
+        return tileInstance;
     }
 
-    public int GetListLength(int layer)
-    {
-        if (layer == 0)
-        {
+    public int GetListLength(int layer) {
+        if (layer == 0) {
             return pathSprites.Length;
         }
-        else if (layer == 1)
-        {
+        else if (layer == 1) {
             return buildingSprites.Length;
         }
-        else if (layer == 2)
-        {
+        else if (layer == 2) {
             return doorSprites.Length;
         }
-        else
-        {
+        else {
             return envirSprites.Length;
         }
     }

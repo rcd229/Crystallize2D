@@ -7,7 +7,12 @@ using Util;
 public class Object2DSceneResourceManager : MonoBehaviour {
     const string Object2DBasePrefab = "Object2DBase";
     const string Object2DPrefabsDirectory = "Object2DPrefabs/";
-    const string _Stage = "Default";
+
+    string _stage {
+        get {
+            return Tile2DSceneResourceManager.Instance.currentLevel.levelname;
+        }
+    }
 
     static Object2DSceneResourceManager _instance;
     public static Object2DSceneResourceManager Instance {
@@ -51,7 +56,7 @@ public class Object2DSceneResourceManager : MonoBehaviour {
     }
 
     public void Save(Object2D obj) {
-        Object2DLoader.Save(_Stage, obj);
+        Object2DLoader.Save(_stage, obj);
     }
 
     public void DeleteAt(Vector2 pos) {
@@ -63,7 +68,7 @@ public class Object2DSceneResourceManager : MonoBehaviour {
             var obj = resources[pos].GetComponent<Object2DComponent>().Object;
             Destroy(resources[pos]);
             resources.Remove(pos);
-            Object2DLoader.Delete(_Stage, obj);
+            Object2DLoader.Delete(_stage, obj);
         }
     }
 
@@ -72,7 +77,7 @@ public class Object2DSceneResourceManager : MonoBehaviour {
     }
 
     public void LoadAll() {
-        var objects = Object2DLoader.LoadAll(_Stage);
+        var objects = Object2DLoader.LoadAll(_stage);
         foreach(var obj in objects) {
             Place(obj);
         }
@@ -89,10 +94,24 @@ public class Object2DSceneResourceManager : MonoBehaviour {
         var baseObject = GameObjectUtil.GetResourceInstance(Object2DBasePrefab);
         baseObject.GetOrAddComponent<Object2DComponent>().Initialize(obj);
         baseObject.transform.position = GetWorldPosition(GetGridPosition(obj.Position));
+        baseObject.name = string.Format("{0} ({1})", obj.Name, obj.GetType());
 
         var graphicObject = GameObjectUtil.GetResourceInstance(Object2DPrefabsDirectory + obj.PrefabName);
         graphicObject.transform.SetParent(baseObject.transform);
         graphicObject.transform.localPosition = Vector3.zero;
+
+        if (obj is IHasTrigger) {
+            var c = baseObject.AddComponent<BoxCollider2D>();
+            c.isTrigger = true;
+        }
+
+        if (obj is IHasCollider) {
+            baseObject.AddComponent<BoxCollider2D>();
+        }
+
+        if (Object2DBehaviourMap.Instance.HasTypeFor(obj.GetType())) {
+            baseObject.AddComponent(Object2DBehaviourMap.Instance.GetTypeFor(obj.GetType()));
+        }
 
         foreach (var i in baseObject.GetInterfacesInChildren<IInitializable<Object2D>>()) {
             i.Initialize(obj);

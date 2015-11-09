@@ -20,7 +20,6 @@ public class TilePlacerUI : MonoBehaviour {
         {
             Refresh();
         }
-	
 	}
 
     void Refresh()
@@ -28,13 +27,13 @@ public class TilePlacerUI : MonoBehaviour {
         tilelist.DestroyAndClear();
         lastlayer = TilePlacer.placer.getLayer();
         var index = 0;
-        foreach (Sprite sprite in TileSpriteManager.tileManager.getAllSprites((int)lastlayer))
+        foreach (Sprite sprite in TileSpriteManager.Instance.GetAllSprites((int)lastlayer))
         {
             var tile = Instantiate<GameObject>(tileprefab);
             tile.GetComponent<Image>().sprite = sprite;
-            Debug.Log(sprite.pivot);
+            //Debug.Log(sprite.pivot);
             var npivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y/sprite.rect.height);
-            Debug.Log(npivot);
+            //Debug.Log(npivot);
             if (npivot != new Vector2(0.5f,0.5f))
             {
                 tile.GetComponent<Image>().color = Color.grey;

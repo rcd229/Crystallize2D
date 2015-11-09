@@ -6,7 +6,6 @@ using System.Linq;
 
 public class TilePlacer : MonoBehaviour {
 
-    public TileSpriteManager tileManager;
     private GameObject tile;
     private int type;
     private SpriteLayer layer;
@@ -24,17 +23,17 @@ public class TilePlacer : MonoBehaviour {
         type = 0;
     }
 
-    void SwitchLevel()
-    {
-        if (Tile2DInitializer.Instance.currentLevel == GameLevel2D.DefaultLevel)
-        {
-            Tile2DInitializer.Instance.LoadLevel(GameLevel2D.TestLevel);
-        }
-        else
-        {
-            Tile2DInitializer.Instance.LoadLevel(GameLevel2D.DefaultLevel);
-        } 
-    }
+    //void SwitchLevel()
+    //{
+    //    if (Tile2DInitializer.Instance.currentLevel == GameLevel2D.DefaultLevel)
+    //    {
+    //        Tile2DInitializer.Instance.LoadLevel(GameLevel2D.TestLevel);
+    //    }
+    //    else
+    //    {
+    //        Tile2DInitializer.Instance.LoadLevel(GameLevel2D.DefaultLevel);
+    //    } 
+    //}
 
     // Update is called once per frame
     void Update () {
@@ -50,11 +49,15 @@ public class TilePlacer : MonoBehaviour {
         mousePos.x = Mathf.RoundToInt(mousePos.x);
         mousePos.y = Mathf.RoundToInt(mousePos.y);
 
-        var tListLength = tileManager.GetListLength((int)layer);
+        var tListLength = TileSpriteManager.Instance.GetListLength((int)layer);
 
         if (Input.GetMouseButtonDown(0) && !UIUtil.MouseOverUI())
         {
-            Tile2DInitializer.Instance.createTileAtMousePos(mousePos, layer, type);
+            Tile2DSceneResourceManager.Instance.createTileAtMousePos(mousePos, layer, type);
+        }
+
+        if (Input.GetMouseButtonDown(1) && !UIUtil.MouseOverUI()) {
+            Tile2DSceneResourceManager.Instance.removeTileAtMousePos(mousePos, layer);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab)) {
@@ -69,16 +72,6 @@ public class TilePlacer : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
             type = 0;
             layer = (SpriteLayer)(((int)layer + 1) % 4);
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            SwitchLevel();
         }
     }
 
