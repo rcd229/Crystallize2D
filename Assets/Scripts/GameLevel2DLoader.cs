@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class GameLevel2DLoader : Loader2D
 {
 
-    public IEnumerable<GameLevel2D> GetAllLevels()
+    public static IEnumerable<GameLevel2D> GetAllLevels()
     {
         var path = DirectoryPath;
         return from p in Directory.GetDirectories(path) select new GameLevel2D(Path.GetDirectoryName(p));
