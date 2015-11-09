@@ -1,0 +1,11 @@
+{
+  "$type": "SceneNPC2D, Assembly-CSharp",
+  "Guid": "b5201188-8cdd-488a-8559-4f4559b53b29",
+  "Name": "New SceneNPC2D",
+  "PrefabName": "Character1",
+  "Position": {
+    "$type": "SerializableVector2, Assembly-CSharp",
+    "x": 3.71675563,
+    "y": 2.54921079
+  }
+}
