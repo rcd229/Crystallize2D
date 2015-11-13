@@ -10,6 +10,5 @@ public class Object2DComponent : MonoBehaviour, IInitializable<Object2D> {
 
     public void Initialize(Object2D obj) {
         this.Object = obj;
-        Debug.Log(obj);
     }
 }
