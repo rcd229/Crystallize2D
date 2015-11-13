@@ -10,6 +10,7 @@ public class Object2DPlacer : MonoBehaviour {
     int graphicIndex = 0;
     string currentPrefabName;
     GameObject[] graphicPrefabs;
+    public static Object2DPlacer placer;
 
     int objectTypeIndex = 0;
     Type[] objectTypes;
@@ -28,6 +29,7 @@ public class Object2DPlacer : MonoBehaviour {
     }
 
     void Awake() {
+        placer = this;
         graphicPrefabs = Object2DSceneResourceManager.GetGraphicPrefabs();
         GraphicIndex = 0;
 
@@ -59,6 +61,11 @@ public class Object2DPlacer : MonoBehaviour {
                 Object2DEditorResourceManager.Instance.OpenEditorFor(obj);
             }
         }
+    }
+
+    public void setIndex(int index)
+    {
+        graphicIndex = index;
     }
 
 }
