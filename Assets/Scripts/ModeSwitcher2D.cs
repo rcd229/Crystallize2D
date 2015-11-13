@@ -7,7 +7,7 @@ public class ModeSwitcher2D : MonoBehaviour
     GameObject currentPrefab;
     int index;
 
-	public ModeSwitcher2D()
+	public void Start()
 	{
         index = 0;
         currentPrefab = Instantiate<GameObject>(prefabs[index]);
@@ -18,7 +18,7 @@ public class ModeSwitcher2D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             Destroy(currentPrefab);
-            index++;
+            index = (index + 1) % prefabs.Length;
             currentPrefab = Instantiate<GameObject>(prefabs[index]);
         }
     }
