@@ -20,6 +20,7 @@ public class ModeSwitcher2D : MonoBehaviour
             Destroy(currentPrefab);
             index = (index + 1) % prefabs.Length;
             currentPrefab = Instantiate<GameObject>(prefabs[index]);
+            Debug.Log("Prefab: " + prefabs[index]);
         }
     }
 }

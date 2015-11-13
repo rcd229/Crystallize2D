@@ -4,13 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Util;
 
-public class TileObject
-{
+public class TileObject {
     public Vector2int position;
     public byte type;
 
-    public TileObject(Vector2int pos, byte t)
-    {
+    public TileObject(Vector2int pos, byte t) {
         position = pos;
         type = t;
     }
@@ -28,14 +26,13 @@ public class TileMap2D {
     public SpriteLayer layer;
     public string levelname;
 
-    public TileMap2D()
-    {
+    public TileMap2D() {
     }
 
-    public TileMap2D (SpriteLayer ly, string ln) {
-            levelname = ln;
-            layer = ly;
-            maps = MapLoader2D.LoadAll(layer, levelname);
+    public TileMap2D(SpriteLayer ly, string ln) {
+        levelname = ln;
+        layer = ly;
+        maps = MapLoader2D.LoadAll(layer, levelname);
     }
 
     public IEnumerable<Vector2int> GetPositions(Vector2int areaPosition) {
@@ -82,7 +79,8 @@ public class TileMap2D {
                 maps[reducedPoint] = new byte[MapSize * MapSize];
                 var newMap = maps[reducedPoint];
                 for (int i = 0; i < newMap.Length; i++) { newMap[i] = 0; }
-            } else {
+            }
+            else {
                 maps[reducedPoint] = m;
             }
         }
@@ -95,17 +93,14 @@ public class TileMap2D {
     }
 
 
-    public List<TileObject> GetTiles()
-    {
+    public List<TileObject> GetTiles() {
         var tiles = new List<TileObject>();
-        foreach (var m in maps)
-        {
-            for (int i = 0; i < m.Value.Length; i++)
-            {
-                    var x = i / MapSize;
-                    var y = i - (x * MapSize);
-                    TileObject t = new TileObject((MapSize * m.Key + new Vector2int(x, y)), m.Value[i]);
-                    tiles.Add(t);
+        foreach (var m in maps) {
+            for (int i = 0; i < m.Value.Length; i++) {
+                var x = i / MapSize;
+                var y = i - (x * MapSize);
+                TileObject t = new TileObject((MapSize * m.Key + new Vector2int(x, y)), m.Value[i]);
+                tiles.Add(t);
             }
         }
         return tiles;

@@ -22,7 +22,7 @@ public class SceneChangeTrigger2DBehaviour : MonoBehaviour {
                 other.transform.position = (Vector2)target.Position;
             }
             // load the other scene here
-            Tile2DInitializer.Instance.LoadLevel(GameLevel2D.GetGameLevel(trigger.Scene));
+            GameLevel2DSceneResourceManager.LoadLevel(GameLevel2D.GetGameLevel(trigger.Scene));
         }
     }
 }

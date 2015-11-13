@@ -13,8 +13,9 @@ public class DictionaryData {
 
     public const int AdditionalEntryStartID = 10000000;
 
-    const string DictionaryFilePath = "/crystallize/Resources/JMDict_e/JMDict_e";
-    const string EditorFilePath = "/crystallize/Resources/";
+    // TODO: make this a setting
+    const string DictionaryFilePath = "/Resources/JMDict_e/JMDict_e";
+    const string EditorFilePath = "/Resources/";
     const string FileName = "Dictionary";
     const string PlayerFilePath = "/PlayerGameData/";
     const string FileExtension = ".txt";

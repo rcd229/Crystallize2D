@@ -37,5 +37,6 @@ public class SceneChangeTrigger2DEditor : Object2DEditorBase {
 
     void SelectScene(SceneChangeTrigger2D obj, GameLevel2D[] levels, int selected) {
         obj.Scene = levels[selected].levelname;
+        Save();
     }
 }

@@ -20,7 +20,8 @@ public class MapLoader2D : Loader2D {
                 s = reader.ReadLine();
             }
             return s.ConvertHexToByteArray();
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -30,10 +31,7 @@ public class MapLoader2D : Loader2D {
         var dict = new Dictionary<Vector2int, byte[]>();
 
         //load each tile in layer l and place in dictionary
-
         foreach (var file in Directory.GetFiles(TileDirectoryPath(l, levelname))) {
-            Debug.Log(l.ToString());
-            Debug.Log(TileDirectoryPath(l, levelname).ToString());
             var name = Path.GetFileName(file);
             var stringSplit = name.Replace("(", "").Replace(")", "").Split(',');
             var vec = new Vector2int(int.Parse(stringSplit[0]), int.Parse(stringSplit[1]));
