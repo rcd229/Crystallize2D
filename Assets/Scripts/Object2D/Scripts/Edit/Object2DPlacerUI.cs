@@ -22,6 +22,7 @@ public class Object2DPlacerUI : MonoBehaviour
 
     void Refresh()
     {
+        objectList.DestroyAndClear();
         var index = 0;
         foreach (GameObject gobj in Object2DSceneResourceManager.GetGraphicPrefabs())
         {

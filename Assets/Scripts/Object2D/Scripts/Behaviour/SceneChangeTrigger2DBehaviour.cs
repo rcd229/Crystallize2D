@@ -10,19 +10,10 @@ using System.Text;
 public class SceneChangeTrigger2DBehaviour : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
+
             var trigger = GetComponent<Object2DComponent>().Object as SceneChangeTrigger2D;
+            Scene2DTransitions.Instance.TransitionToScene(trigger);
 
-            var objs = Object2DLoader.LoadAll(trigger.Scene);
-            var target = (from o in objs
-                          where o.Guid == trigger.Target 
-                          select o)
-                         .FirstOrDefault();
-
-            if (target != null) {
-                other.transform.position = (Vector2)target.Position;
-            }
-            // load the other scene here
-            GameLevel2DSceneResourceManager.LoadLevel(GameLevel2D.GetGameLevel(trigger.Scene));
         }
     }
 }

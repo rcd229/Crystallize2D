@@ -22,6 +22,19 @@ public class SceneChangeTrigger2DEditor : Object2DEditorBase {
             GetSelectedLevelIndex(levels, o.Scene), 
             (i) => SelectScene(o, levels, i));
         // TODO: add dropdown for target
+        var objs = Object2DLoader.LoadAll(o.Scene);
+        var targets = (from t in objs
+                      where t is SceneTarget2D
+                      select t).ToList();
+        var currentTarget = (from target in targets where target.Guid == o.Target select target).FirstOrDefault();
+        if (o.Target == Guid.Empty && targets.Count > 0)
+        {
+            o.Target = targets[0].Guid;
+        }
+        Controls.AddDropDown(targets.Select(s => s.Name),
+            targets.IndexOf(currentTarget),
+            (i) => SelectTarget(o, targets, i));
+        Controls.AddButton(Save, "Save");
     }
 
     int GetSelectedLevelIndex(IEnumerable<GameLevel2D> levels, string levelname) {
@@ -35,8 +48,15 @@ public class SceneChangeTrigger2DEditor : Object2DEditorBase {
         return 0;
     }
 
+
     void SelectScene(SceneChangeTrigger2D obj, GameLevel2D[] levels, int selected) {
         obj.Scene = levels[selected].levelname;
+        Save();
+    }
+
+    void SelectTarget(SceneChangeTrigger2D obj, List<Object2D> objects, int selected)
+    {
+        obj.Target = objects[selected].Guid;
         Save();
     }
 }

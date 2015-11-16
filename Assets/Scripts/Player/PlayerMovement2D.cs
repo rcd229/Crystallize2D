@@ -53,4 +53,9 @@ public class PlayerMovement2D : MonoBehaviour {
             }
         } 
     }
+
+    public void setDirection(string direction)
+    {
+        anim.Play(direction);
+    }
 }

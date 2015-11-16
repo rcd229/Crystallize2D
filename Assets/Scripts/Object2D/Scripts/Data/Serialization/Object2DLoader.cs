@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Util.Serialization;
+using System.Linq;
 
 public class Object2DLoader {
     public static string DirectoryPath { get { return Directory.GetParent(Application.dataPath) + "/CrystallizeData2D/"; } }
@@ -49,6 +50,17 @@ public class Object2DLoader {
             foreach (var f in Directory.GetFiles(dir)) {
                 objects.Add(Load(f));
             }
+        }
+        return objects;
+    }
+
+    public static List<Object2D>LoadAll()
+    {
+        var levels = GameLevel2DLoader.GetAllLevels().ToArray();
+        var objects = new List<Object2D>();
+        foreach (GameLevel2D level in levels)
+        {
+            objects.AddRange(LoadAll(level.levelname));
         }
         return objects;
     }
