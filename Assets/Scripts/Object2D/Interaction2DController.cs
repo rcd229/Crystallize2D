@@ -14,14 +14,15 @@ public class Interaction2DController : MonoBehaviour
         {
             //Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
-            RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, fwd);
-
+            var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(pos, fwd);
+            Debug.Log("casting ray:" + hit.transform);
             //check for IInteractable interface
             //if so, cast it as that and call interact function
 
             if (hit.transform)
             {
-                IInteractable2D[] intrfaces = hit.rigidbody.gameObject.GetInterfacesInChildren<IInteractable2D>();
+                IInteractable2D[] intrfaces = hit.transform.gameObject.GetInterfacesInChildren<IInteractable2D>();
                 foreach (IInteractable2D i in intrfaces) {
                     i.Interact();
                 }

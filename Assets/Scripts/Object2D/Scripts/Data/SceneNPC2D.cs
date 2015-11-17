@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-public class NPC2D : Object2D {
+public class NPC2D : Object2D, IHasCollider {
     public List<DialogueEntry2D> Dialogues { get; set; }
 
     [JsonIgnore]

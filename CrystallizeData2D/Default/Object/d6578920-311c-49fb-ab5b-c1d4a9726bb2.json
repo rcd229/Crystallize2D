@@ -5,17 +5,17 @@
     "$values": [
       {
         "$type": "DialogueEntry2D, Assembly-CSharp",
-        "Guid": "35f05dd6-8fb7-42ea-86d7-a0287ab81d2c",
-        "Description": "fjadlgjd\nffjsdlf"
+        "Guid": "f132fa56-d965-48b8-9887-b889fb3a758b",
+        "Description": "fdfgadf"
       }
     ]
   },
-  "Guid": "c68b0ecb-d990-461a-8a8d-65f7fc38ab58",
+  "Guid": "d6578920-311c-49fb-ab5b-c1d4a9726bb2",
   "Name": "New Object2D",
   "PrefabName": "Character1",
   "Position": {
     "$type": "SerializableVector2, Assembly-CSharp",
-    "x": -22.3661728,
-    "y": -1.06289256
+    "x": -22.0508289,
+    "y": -1.04934978
   }
 }
