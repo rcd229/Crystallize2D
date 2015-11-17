@@ -12,7 +12,7 @@ public class Interaction2DController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, fwd);
 

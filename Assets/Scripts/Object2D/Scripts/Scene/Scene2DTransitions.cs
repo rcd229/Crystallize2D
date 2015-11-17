@@ -51,7 +51,7 @@ public class Scene2DTransitions : MonoBehaviour
         if (target != null)
         {
             player.transform.position = (Vector2)target.Position;
-            player.
+            //player.
         }
 
         //start blackout

@@ -2,6 +2,7 @@
 
 public class SceneNPC2D : Object2D
 {
+    
 	public SceneNPC2D()
 	{
 	}
