@@ -34,7 +34,6 @@ public class SceneChangeTrigger2DEditor : Object2DEditorBase {
         Controls.AddDropDown(targets.Select(s => s.Name),
             targets.IndexOf(currentTarget),
             (i) => SelectTarget(o, targets, i));
-        Controls.AddButton(Save, "Save");
     }
 
     int GetSelectedLevelIndex(IEnumerable<GameLevel2D> levels, string levelname) {

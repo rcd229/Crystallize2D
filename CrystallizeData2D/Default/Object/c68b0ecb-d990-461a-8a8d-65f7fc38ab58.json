@@ -1,0 +1,21 @@
+{
+  "$type": "NPC2D, Assembly-CSharp",
+  "Dialogues": {
+    "$type": "System.Collections.Generic.List`1[[DialogueEntry2D, Assembly-CSharp]], mscorlib",
+    "$values": [
+      {
+        "$type": "DialogueEntry2D, Assembly-CSharp",
+        "Guid": "35f05dd6-8fb7-42ea-86d7-a0287ab81d2c",
+        "Description": "fjadlgjd\nffjsdlf"
+      }
+    ]
+  },
+  "Guid": "c68b0ecb-d990-461a-8a8d-65f7fc38ab58",
+  "Name": "New Object2D",
+  "PrefabName": "Character1",
+  "Position": {
+    "$type": "SerializableVector2, Assembly-CSharp",
+    "x": -22.3661728,
+    "y": -1.06289256
+  }
+}
