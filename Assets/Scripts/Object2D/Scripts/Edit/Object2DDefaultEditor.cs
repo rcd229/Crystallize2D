@@ -8,8 +8,11 @@ public class Object2DDefaultEditor: MonoBehaviour, IInitializable<Object2D> {
     public void Initialize(Object2D args1) {
         var controls = GetComponent<Object2DEditorControls>();
 
+        controls.AddLabel("Type");
         controls.AddDropDown(Object2D.GetTypes(), GetIndex(Object2D.GetTypes(), args1.GetType()), i => SelectType(args1, i));
+        controls.AddLabel("Name");
         controls.AddInputField(() => args1.Name, s => SetName(args1, s));
+        controls.AddButton(() => Save(args1), "Save");
         controls.AddButton(() => Delete(args1), "Delete");
         controls.AddButton(Close, "Close");
     }
@@ -28,6 +31,11 @@ public class Object2DDefaultEditor: MonoBehaviour, IInitializable<Object2D> {
     void SetName(Object2D obj, string name) {
         obj.Name = name;
         Object2DSceneResourceManager.Instance.Save(obj);
+    }
+
+    void Save(Object2D obj) {
+        Object2DSceneResourceManager.Instance.Save(obj);
+        Debug.Log("Saved: " + DateTime.Now);
     }
 
     void Delete(Object2D obj) {

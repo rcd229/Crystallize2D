@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[Object2DBehaviour(typeof(SceneNPC2D))]
+[Object2DBehaviour(typeof(NPC2D))]
 public class SceneNPC2DBehaviour : MonoBehaviour, IInteractable2D
 {
     public void Interact()

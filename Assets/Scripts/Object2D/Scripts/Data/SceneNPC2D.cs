@@ -1,9 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
-public class SceneNPC2D : Object2D
-{
-    
-	public SceneNPC2D()
-	{
-	}
+public class NPC2D : Object2D {
+    public List<DialogueEntry2D> Dialogues { get; set; }
+
+    [JsonIgnore]
+    public DialogueEntry2D Dialogue {
+        get {
+            if(Dialogues.Count == 0) {
+                Dialogues.Add(new DialogueEntry2D());
+            }
+            return Dialogues[0];
+        }
+    }
+
+    public NPC2D() {
+        Dialogues = new List<DialogueEntry2D>();
+    }
 }

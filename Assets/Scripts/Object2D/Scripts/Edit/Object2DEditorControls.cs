@@ -7,9 +7,25 @@ using System.Linq;
 
 public class Object2DEditorControls: MonoBehaviour {
     // TODO: add entries here
+    public GameObject labelContainer;
     public GameObject buttonPrefab;
     public GameObject inputFieldPrefab;
+    public GameObject inputAreaPrefab;
     public GameObject dropdownPrefab;
+    public GameObject labelPrefab;
+
+    Transform currentContainer;
+
+    public void AddLabel(string text, bool withContainer = true) {
+        var instance = GetInstance(labelPrefab);
+        SetLabel(instance, text);
+
+        if (withContainer) {
+            var container = GetInstance(labelContainer).transform;
+            instance.transform.SetParent(container);
+            currentContainer = container;
+        }
+    }
 
     public void AddButton(Action onClick, string label = "New Button") {
         var instance = GetInstance(buttonPrefab);
@@ -20,6 +36,18 @@ public class Object2DEditorControls: MonoBehaviour {
     public void AddInputField(Func<string> getValue, Action<string> endEdit) {
         var instance = GetInstance(inputFieldPrefab);
         instance.GetComponent<InputField>().text = getValue();
+        instance.GetComponent<InputField>().onEndEdit.AddListener((s) => endEdit(s));
+    }
+
+    public void AddInputArea(Func<string> getValue, Action<string> endEdit) {
+        var instance = GetInstance(inputAreaPrefab);
+        CoroutineManager.Instance.WaitAndDo(() => instance.GetComponent<InputField>().text = getValue());
+        instance.GetComponent<InputField>().onEndEdit.AddListener((s) => endEdit(s));
+    }
+
+    public void AddInputArea(string val, Action<string> endEdit) {
+        var instance = GetInstance(inputAreaPrefab);
+        CoroutineManager.Instance.WaitAndDo(() => instance.GetComponent<InputField>().text = val);
         instance.GetComponent<InputField>().onEndEdit.AddListener((s) => endEdit(s));
     }
 
@@ -36,7 +64,12 @@ public class Object2DEditorControls: MonoBehaviour {
 
     GameObject GetInstance(GameObject prefab) {
         var instance = Instantiate<GameObject>(prefab);
-        instance.transform.SetParent(transform);
+        if (currentContainer) {
+            instance.transform.SetParent(currentContainer);
+            currentContainer = null;
+        } else {
+            instance.transform.SetParent(transform);
+        }
         return instance;
     }
 
