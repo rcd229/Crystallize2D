@@ -10,10 +10,10 @@ GameObject:
   - 224: {fileID: 22422704}
   - 222: {fileID: 22215840}
   - 114: {fileID: 11487550}
-  - 114: {fileID: 11403630}
   - 114: {fileID: 11462788}
   - 114: {fileID: 11482130}
   - 114: {fileID: 11425716}
+  - 114: {fileID: 11486472}
   m_Layer: 5
   m_Name: Object2DEditorBase
   m_TagString: Untagged
@@ -21,26 +21,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &11403630
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 137196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -405508275, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 4
-    m_Right: 4
-    m_Top: 4
-    m_Bottom: 4
-  m_ChildAlignment: 0
-  m_Spacing: 4
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
 --- !u!114 &11425716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,9 +56,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e247b539fbdb73e438312b45e9173782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  labelContainer: {fileID: 137594, guid: 9d1ed6993520c404da6448def20bba1d, type: 2}
   buttonPrefab: {fileID: 122948, guid: dc7ccd660ca911c44b6af3965c6e7a63, type: 2}
   inputFieldPrefab: {fileID: 196352, guid: 184c83cc77bb3d847b6c7b2f2078d3f9, type: 2}
+  inputAreaPrefab: {fileID: 176224, guid: d362b50514acb384fb2ff376abc99b84, type: 2}
   dropdownPrefab: {fileID: 114920, guid: 61d7e362ca8109045b870563e7dff55e, type: 2}
+  labelPrefab: {fileID: 108328, guid: 01c33ede3726bb24aab853ca6ac0e964, type: 2}
+--- !u!114 &11486472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1297475563, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 4
+    m_Right: 4
+    m_Top: 4
+    m_Bottom: 4
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
 --- !u!114 &11487550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,6 +143,14 @@ Prefab:
       propertyPath: dropdownPrefab
       value: 
       objectReference: {fileID: 114920, guid: 61d7e362ca8109045b870563e7dff55e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: inputAreaPrefab
+      value: 
+      objectReference: {fileID: 176224, guid: d362b50514acb384fb2ff376abc99b84, type: 2}
+    - target: {fileID: 0}
+      propertyPath: labelPrefab
+      value: 
+      objectReference: {fileID: 108328, guid: 01c33ede3726bb24aab853ca6ac0e964, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 137196}
