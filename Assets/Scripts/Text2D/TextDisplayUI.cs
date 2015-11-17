@@ -6,9 +6,7 @@ using UnityEngine.UI;
 [ResourcePath("UI/TextDisplayImage")]
 public class TextDisplayUI : MonoBehaviour
 {
-    public GameObject TextEditorPrefab;
     List<string> textList = new List<string>();
-    public GameObject TextEditor;
     int index = 0;
     static TextDisplayUI _instance;
     public static TextDisplayUI Instance
@@ -45,7 +43,7 @@ public class TextDisplayUI : MonoBehaviour
         }
         else
         {
-            Destroy(TextEditor);
+            Destroy(gameObject);
         }
     }
 
