@@ -41,6 +41,10 @@ public class PhraseSetCollectionGameData {
 
     public static void LoadAll() {
         bool loaded = false;
+        if (!Directory.Exists(GetEditorDirectory())) {
+            Directory.CreateDirectory(GetEditorDirectory());
+        }
+
         foreach (var f in Directory.GetFiles(GetEditorDirectory(), "*.txt")) {
             var name = Path.GetFileNameWithoutExtension(f);
             if (!instances.ContainsKey(name)) {

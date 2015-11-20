@@ -8,7 +8,7 @@ using System;
 public abstract class DraggableObject : MonoBehaviour, IPointerClickHandler, IInitializable<PhraseSequence>, IDragHandler, IBeginDragHandler {
     public PhraseSequence Phrase { get; set; }
 
-    public void Initialize(PhraseSequence phrase) {
+    public virtual void Initialize(PhraseSequence phrase) {
         Phrase = phrase;
     }
 
