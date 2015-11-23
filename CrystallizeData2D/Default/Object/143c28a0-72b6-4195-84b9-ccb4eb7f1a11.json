@@ -1,12 +1,12 @@
 {
   "$type": "NPC2D, Assembly-CSharp",
   "DialogueKey": "System.MonoType:GreetingDialogue",
-  "Guid": "2616f40b-7c30-4992-bea0-bbeaf81fac65",
+  "Guid": "143c28a0-72b6-4195-84b9-ccb4eb7f1a11",
   "Name": "New Object2D",
   "PrefabName": "Character1",
   "Position": {
     "$type": "SerializableVector2, Assembly-CSharp",
-    "x": -0.335502028,
-    "y": -0.09171024
+    "x": -15.3456774,
+    "y": -0.15486604
   }
 }

@@ -52,9 +52,6 @@ public class TilePlacer : MonoBehaviour {
 
         var tListLength = TileSpriteManager.Instance.GetListLength((int)layer);
 
-        //get current level
-        var dropdown = from thing in GetComponentsInParent<GameObject>() where thing.name == "CurrentLevel" select thing;
-
         if (Input.GetMouseButtonDown(0) && !UIUtil.MouseOverUI())
         {
             Tile2DSceneResourceManager.Instance.createTileAtMousePos(mousePos, layer, type);

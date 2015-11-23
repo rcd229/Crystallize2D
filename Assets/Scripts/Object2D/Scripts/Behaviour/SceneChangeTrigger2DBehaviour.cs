@@ -9,7 +9,8 @@ using System.Text;
 // All behaviours must derive from monobehaviour
 public class SceneChangeTrigger2DBehaviour : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player") {
+        var rigidbody = other.GetComponent<Rigidbody2D>();
+        if (other.tag == "Player" && rigidbody != null & rigidbody.velocity.y > 0) {
 
             var trigger = GetComponent<Object2DComponent>().Object as SceneChangeTrigger2D;
             Scene2DTransitions.Instance.TransitionToScene(trigger);

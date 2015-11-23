@@ -63,9 +63,9 @@ public class Object2DPlacer : MonoBehaviour {
         }
     }
 
-    public void setIndex(int index)
+    public void SetIndex(int index)
     {
-        graphicIndex = index;
+        GraphicIndex = index;
     }
 
 }

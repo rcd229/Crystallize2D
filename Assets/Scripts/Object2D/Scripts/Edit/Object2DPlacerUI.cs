@@ -17,7 +17,7 @@ public class Object2DPlacerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Refresh();
+        //Refresh();
     }
 
     void Refresh()
@@ -28,14 +28,9 @@ public class Object2DPlacerUI : MonoBehaviour
         {
             var block = Instantiate<GameObject>(tileprefab);
             block.GetComponent<Image>().sprite = gobj.GetComponent<SpriteRenderer>().sprite;
-            /*var npivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
-            Debug.Log(npivot);
-            if (npivot != new Vector2(0.5f, 0.5f))
-            {
-                tile.GetComponent<Image>().color = Color.grey;
-            }*/
             block.transform.SetParent(transform, false);
             block.AddComponent<DataContainer>().Store<int>(index);
+            Debug.Log(index);
             block.AddComponent<UIButton>().OnClicked += Object2DPlacerUI_OnClicked;
             objectList.Add(block);
             index++;
@@ -45,7 +40,8 @@ public class Object2DPlacerUI : MonoBehaviour
     private void Object2DPlacerUI_OnClicked(object sender, EventArgs<UnityEngine.EventSystems.PointerEventData> e)
     {
         var ind = ((UIButton)sender).GetComponent<DataContainer>().Retrieve<int>();
-        Object2DPlacer.placer.setIndex(ind);
+        Debug.Log(ind);
+        Object2DPlacer.placer.SetIndex(ind);
     }
 
     public void ScrollLeft()

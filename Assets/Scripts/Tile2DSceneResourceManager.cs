@@ -43,9 +43,4 @@ public class Tile2DSceneResourceManager : MonoBehaviour {
         LoadLevel(currentLevel);
     }
 
-    public void setCurrentLevel(GameLevel2D level)
-    {
-        currentLevel = level;
-    }
-
 }
