@@ -10,6 +10,6 @@ public class LineDialogueElementProcess : EnumeratorProcess<PlayDialogueContext,
         TextDisplayUI.Instance.Display((args.CurrentElement as LineDialogueElement).Line.Phrase);
         UIUtil.WaitForClick(Continue);
         yield return Wait();
-        TextDisplayUI.Instance.Close();
+        //TextDisplayUI.Instance.Close();
     }
 }

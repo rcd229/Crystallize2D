@@ -33,16 +33,6 @@ public class ContainsDialogueBase {
     protected static PromptResponsePair Prompted(string promptKey, params Element[] elements) { return new PromptResponsePair(promptKey, false, elements); }
     protected static PromptResponsePair EnglishPrompted(string promptKey, params Element[] elements) { return new PromptResponsePair(promptKey, true, elements); }
 
-    public static DialogueSequence BuildDialogue(string key, params Element[] elements) {
-        var b = new DialogueSequenceBuilder(key);
-        AddElements(b, elements);
-        return b.Build();
-    }
-
-    protected DialogueSequence BuildDialogue(params Element[] elements) {
-        return BuildDialogue(GetType().ToString(), elements);
-    }
-
     static void AddElements(DialogueSequenceBuilder builder, IEnumerable<Element> elements) {
         foreach (var e in elements) {
             AddActors(builder, e);
@@ -95,5 +85,24 @@ public class ContainsDialogueBase {
         while (builder.dialogue.Actors.Count < element.actor) {
             builder.AddActor("Actor" + (builder.dialogue.Actors.Count + 1));
         }
+    }
+
+    public static DialogueSequence BuildDialogue(params Element[] elements) {
+        return BuildDialogue("Default", elements);
+    }
+
+    public static DialogueSequence BuildDialogue(bool isTest, params Element[] elements) {
+        return BuildDialogue("Default", isTest, elements);
+    }
+
+    public static DialogueSequence BuildDialogue(string key, params Element[] elements) {
+        return BuildDialogue(key, false, elements);
+    }
+
+    public static DialogueSequence BuildDialogue(string key, bool isTest, params Element[] elements) {
+        var b = new DialogueSequenceBuilder(key);
+        b.IsTest = isTest;
+        AddElements(b, elements);
+        return b.Build();
     }
 }

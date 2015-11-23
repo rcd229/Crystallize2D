@@ -33,8 +33,7 @@ public class BlackScreenUI : UIMonoBehaviour, ITemporaryUI<object, object> {
         return Instance;
     }
 
-    public event EventHandler<EventArgs<object>> Complete;
-
+    public EventHandler<EventArgs<object>> Complete { get; set; }
     Coroutine coroutine;
     ProcessExitCallback callback;
 

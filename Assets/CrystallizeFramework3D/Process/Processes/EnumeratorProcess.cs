@@ -14,7 +14,7 @@ public class EnumSubProcess : SubProcess {
     public EnumSubProcess(IEnumerator<SubProcess> enumer) { this.enumerator = enumer; }
 }
 
-public class WaitSubProcess : SubProcess {}
+public class WaitSubProcess : SubProcess { }
 
 public abstract class EnumeratorProcess<I, O> : IProcess<I, O> {
 
@@ -35,6 +35,7 @@ public abstract class EnumeratorProcess<I, O> : IProcess<I, O> {
     protected void Exit() {
         BeforeExit();
         current = null;
+        Debug.Log("exiting with: " + ExitArgs);
         OnExit.Raise(this, ExitArgs);
     }
 
@@ -55,9 +56,9 @@ public abstract class EnumeratorProcess<I, O> : IProcess<I, O> {
         return sp;
     }
 
-    protected SubProcess Get<I1, O1>(UIFactoryRef<I1, O1> factory, I1 args) {
-        var sp = new SubProcess<EventArgs<O1>>();
-        factory.Get(args, (s, e) => Callback<EventArgs<O1>>(sp, e), this);
+    protected SubProcess<O1> Get<I1, O1>(UIFactoryRef<I1, O1> factory, I1 args) {
+        var sp = new SubProcess<O1>();
+        factory.Get(args, (s, e) => Callback(sp, e.GetDataSafely()), this);
         return sp;
     }
 
@@ -74,6 +75,9 @@ public abstract class EnumeratorProcess<I, O> : IProcess<I, O> {
         if (current == null || current.Count == 0) return;
         result = args;
         sp.Data = args;
+        if (args is O) {
+            ExitArgs = (O)(object)args;
+        }
         Continue();
     }
 

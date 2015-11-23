@@ -10,5 +10,25 @@
       <Translation>What do you need?</Translation>
       <PhraseElements />
     </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Hi there</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Let's chat</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Nothing</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Ok</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>See you then</Translation>
+      <PhraseElements />
+    </PhraseSequence>
   </Phrases>
 </PhraseSetGameData>

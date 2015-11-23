@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public interface ICompleteable<T>  {
-    event EventHandler<EventArgs<T>> Complete;
+    EventHandler<EventArgs<T>> Complete { get; set; }
 }
 
 public interface ICompleteable : ICompleteable<object> {}

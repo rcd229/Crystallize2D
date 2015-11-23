@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections; 
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -48,7 +48,7 @@ public class DialogueSequenceBuilder : PhrasePipelineBuilder {
     public DialogueSequence dialogue = new DialogueSequence();
     public DialogueElement lastElement;
     public DialogueElement thisElement;
-    
+
     public bool breakOnBranches = true;
 
     Dictionary<BranchDialogueElement, List<BranchRef>> branchMapping = new Dictionary<BranchDialogueElement, List<BranchRef>>();
@@ -56,7 +56,7 @@ public class DialogueSequenceBuilder : PhrasePipelineBuilder {
     BranchRef openLink;
     bool readyToCloseBranches = false;
 
-    public DialogueSequenceBuilder(string setKey) : base(setKey) {    }
+    public DialogueSequenceBuilder(string setKey) : base(setKey) { }
 
     public DialogueSequence Build() {
         AfterPrepareGameData();
@@ -79,7 +79,7 @@ public class DialogueSequenceBuilder : PhrasePipelineBuilder {
         lastElement = null;
     }
 
-    public void OpenBranch(){
+    public void OpenBranch() {
         if (lastElement != null) {
             openBranches.Add(lastElement);
         }

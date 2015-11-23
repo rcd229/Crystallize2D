@@ -5,20 +5,20 @@ using System.Linq;
 using DialogueBuilder;
 
 [StaticDialogues]
-public class Dialogues01  {
-    static DialogueSetBuilder setBuilder = new DialogueSetBuilder("Default");
-
-    static DialogueSequenceBuilder GetBuilder() {
-        setBuilder.IsTest = true;
-        return setBuilder.GetDialogueBuilder();
-    }
+public class Dialogues01 : ContainsDialogueBase {
+    const bool IsTest = true;
 
     public static DialogueSequence GreetingDialogue {
         get {
-            var b = GetBuilder();
-            b.AddLine("Hi there.");
-            b.AddLine("What do you need?");
-            return b.Build();
+            return BuildDialogue(
+                IsTest,
+                Line("Hi there"),
+                Line("What do you need?"),
+                Branch(
+                    Prompted("Let's chat", Line("Ok")),
+                    Prompted("Nothing", Line("See you then"))
+                    )
+                );
         }
     }
 }

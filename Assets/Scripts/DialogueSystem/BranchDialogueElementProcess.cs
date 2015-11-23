@@ -6,6 +6,9 @@ using System;
 
 public class BranchDialogueElementProcess : EnumeratorProcess<List<BranchDialogueElementLink>, int> {
     public override IEnumerator<SubProcess> Run(List<BranchDialogueElementLink> args) {
-        throw new NotImplementedException();
+        var subproc = Get(PhraseSelectionPanelUI.GetFactory(), args);
+        yield return subproc;
+        //ExitArgs = subproc.Data.Data;
+        Debug.Log("Exitargs:" + ExitArgs);
     }
 }

@@ -7,6 +7,7 @@ public class GameLevel2DInitializer : MonoBehaviour {
         GameLevel2DSceneResourceManager.LoadLevel(GameLevel2D.DefaultLevel);
 
         PlayDialogueProcess.Initialize<LineDialogueElementProcess, BranchDialogueElementProcess>();
+        PlayDialogueProcess.EndDialogueProcess.Set<EndDialogueProcess>();
 	}
 	
 }
