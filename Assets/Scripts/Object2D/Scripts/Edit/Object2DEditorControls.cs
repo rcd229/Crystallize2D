@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Object2DEditorControls: MonoBehaviour {
+public class Object2DEditorControls : MonoBehaviour {
     // TODO: add entries here
     public GameObject labelContainer;
     public GameObject buttonPrefab;
@@ -51,13 +51,17 @@ public class Object2DEditorControls: MonoBehaviour {
         instance.GetComponent<InputField>().onEndEdit.AddListener((s) => endEdit(s));
     }
 
-    public void AddDropDown<T>(IEnumerable<T> values, int value, Action<int> onValueChanged) {
+    public void AddDropDown<T>(IEnumerable<T> values, int value, Action<int> onValueChanged, bool updateImmediately = false) {
+        if (updateImmediately) {
+            value = Mathf.Clamp(value, 0, values.Count());
+            onValueChanged.Raise(value);
+        }
+
         var instance = GetInstance(dropdownPrefab);
         var dd = instance.GetComponent<Dropdown>();
         dd.options.Clear();
         dd.options.AddRange(values.Select(v => (new Dropdown.OptionData(v.ToString()))));
-        // force the control to update (it doesn't when already 0)
-        if (dd.value == 0) { dd.value = 1; }
+        if (value == 0) { dd.value = 1; }
         dd.value = value;
         dd.onValueChanged.AddListener(i => onValueChanged(i));
     }
