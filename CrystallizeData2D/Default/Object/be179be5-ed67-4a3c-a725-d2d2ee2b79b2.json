@@ -1,0 +1,11 @@
+{
+  "$type": "Object2D, Assembly-CSharp",
+  "Guid": "be179be5-ed67-4a3c-a725-d2d2ee2b79b2",
+  "Name": "New Object2D",
+  "PrefabName": "door_shiftLeft",
+  "Position": {
+    "$type": "SerializableVector2, Assembly-CSharp",
+    "x": 0.05234766,
+    "y": -2.53797531
+  }
+}

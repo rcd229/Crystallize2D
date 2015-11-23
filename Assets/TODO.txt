@@ -1,0 +1,19 @@
+gimp:
+	path entry
+	home: LOOK AT POKEMON
+		desk
+		closet doors?
+
+level 1:
+	//remove current doors, add door objects
+	//make windows layer over doors layer
+	//make all door objects have door sorting layer
+
+NPCs:
+	attach script to one NPC
+	dropdown: stationary/active
+		active: attach animator controller and animation script
+	make prefabs for all directions
+	make animations
+
+
