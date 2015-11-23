@@ -43,6 +43,7 @@ public class TilePlacer : MonoBehaviour {
     //place tile onscreen
     void tileCreateDestroy()
     {
+
         var mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.z = 0;
@@ -50,6 +51,9 @@ public class TilePlacer : MonoBehaviour {
         mousePos.y = Mathf.RoundToInt(mousePos.y);
 
         var tListLength = TileSpriteManager.Instance.GetListLength((int)layer);
+
+        //get current level
+        var dropdown = from thing in GetComponentsInParent<GameObject>() where thing.name == "CurrentLevel" select thing;
 
         if (Input.GetMouseButtonDown(0) && !UIUtil.MouseOverUI())
         {
