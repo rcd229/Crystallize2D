@@ -14,7 +14,7 @@ public class NPC2DEditor : Object2DEditorBase {
         var vals = DialoguePipeline.GetDialoguePaths().ToList();
         var display = vals.Select(v => "..." + v.Substring(Mathf.Max(0, v.Length - 10)));
         var index = vals.IndexOf(npc.DialogueKey);
-        Controls.AddDropDown(vals, index, (i) => SetDialogue(npc, vals, i), true);
+        Controls.AddDropDown(display, index, (i) => SetDialogue(npc, vals, i), true);
     }
 
     //void SetText(NPC2D npc, string newText) {

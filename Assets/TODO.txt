@@ -15,6 +15,10 @@ NPCs:
 		active: attach animator controller and animation script
 	make prefabs for all directions
 	make animations
+	move text bubble to top of screen (play around with positioning)
+	add some dialogues for town 1
+	create new dialogue classes for each level
+	put little man in front of path to next town to prevent you from moving on 
 
 tiles:
 	add dropdown to GUI to specify level (default is Default Level)
