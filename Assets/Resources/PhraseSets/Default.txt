@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PhraseSetGameData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Default</Name>
+  <Phrases>
+    <PhraseSequence>
+      <Translation>Hi there.</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>What do you need?</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Hi there</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Let's chat</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Nothing</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Ok</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>See you then</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+  </Phrases>
+</PhraseSetGameData>
