@@ -7,11 +7,12 @@ public class SceneNPC2DBehaviour : MonoBehaviour, IInteractable2D
 {
     public void Interact()
     {
-        List<string> strings = new List<string>();
-        strings.Add("Hello World");
-        strings.Add("Welcome to Crystallize 2D");
-        strings.Add("...lol...");
-        var npc = (NPC2D)GetComponent<Object2DComponent>().Object;
-        TextDisplayUI.Instance.Play(npc.Dialogue.Description.Split('\n'));
+        //List<string> strings = new List<string>();
+        //strings.Add("Hello World");
+        //strings.Add("Welcome to Crystallize 2D");
+        //strings.Add("...lol...");
+        //var npc = (NPC2D)GetComponent<Object2DComponent>().Object;
+        //TextDisplayUI.Instance.Play(npc.Dialogue.Description.Split('\n'));
+        new PlayDialogueProcess().Initialize(new PlayDialogueContext(Dialogues01.GreetingDialogue, gameObject));
     }
 }

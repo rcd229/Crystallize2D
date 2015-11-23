@@ -131,4 +131,19 @@ public static class UIUtil {
         GameObject.Destroy(empty.gameObject);
     }
 
+    public static Coroutine WaitForClick(Action onComplete) {
+        return CoroutineManager.Instance.StartCoroutine(WaitForClickCoroutine(onComplete));
+    }
+
+    public static IEnumerator WaitForClickCoroutine(Action onComplete) {
+        yield return null;
+        while (true) {
+            yield return null;
+            if (Input.GetMouseButtonDown(0)) {
+                onComplete.Raise();
+                yield break;
+            }
+        }
+    }
+
 }

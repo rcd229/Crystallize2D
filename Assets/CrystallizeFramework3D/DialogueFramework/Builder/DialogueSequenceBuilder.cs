@@ -12,7 +12,9 @@ public class DialogueSetBuilder : PhrasePipelineBuilder {
     }
 
     public DialogueSequenceBuilder GetDialogueBuilder() {
-        return new DialogueSequenceBuilder(SetKey);
+        var builder = new DialogueSequenceBuilder(SetKey);
+        builder.IsTest = IsTest;
+        return builder;
     }
 
     public DialogueSequence Get(params string[] lines) {

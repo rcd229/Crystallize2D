@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections; 
+using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 
 public class PhraseSetPostCompiler : EditorPostCompiler {
 
@@ -12,6 +12,7 @@ public class PhraseSetPostCompiler : EditorPostCompiler {
     Dictionary<string, PhraseSequence> keySequences = new Dictionary<string, PhraseSequence>(new PostCompilerStringComparer());
 
     public override void AfterCompile() {
+        CollectPhrases();
         //DialogueMap.GetMap();
         UpdateKeySequences();
 
@@ -30,6 +31,23 @@ public class PhraseSetPostCompiler : EditorPostCompiler {
         Debug.Log(
             string.Format("Project update! Unique learnable phrases: [{0}] Unique learnable words: [{1}]", 
             phrases.Count, words.Count));
+    }
+
+    void CollectPhrases() {
+        foreach (var a in AppDomain.CurrentDomain.GetAssemblies()) {
+            var containsPhrases = from t in a.GetTypes()
+                                  where typeof(IContainsStaticPhrases).IsAssignableFrom(t)
+                                  select t;
+            foreach(var cp in containsPhrases) {
+                //Debug.Log("trying: " + cp);
+                if (cp.GetConstructor(Type.EmptyTypes) != null) {
+                    var cpInst = (IContainsStaticPhrases)Activator.CreateInstance(cp);
+                    cpInst.Initialize();
+                } else {
+                    //Debug.LogWarning(cp + " does not have")
+                }
+            }
+        }
     }
 
     void UpdateKeySequences() {

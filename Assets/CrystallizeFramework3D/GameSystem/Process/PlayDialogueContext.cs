@@ -16,6 +16,15 @@ public class PlayDialogueContext {
 
     public PlayDialogueContext(DialogueSequence dialogue, params GameObject[] actors) {
         Dialogue = dialogue;
+        CurrentElement = Dialogue.Elements.Get(0);
         Actors = actors.ToList();
+    }
+
+    public void MoveTo(int elementId) {
+        if (Dialogue.Elements.ContainsKey(elementId)) {
+            CurrentElement = Dialogue.GetElement(elementId);
+        } else {
+            CurrentElement = null;
+        }
     }
 }

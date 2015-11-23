@@ -12,14 +12,22 @@ public class TextDisplayUI : MonoBehaviour {
         get {
             if (!_instance) {
                 _instance = GameObjectUtil.GetResourceInstanceFromAttribute<TextDisplayUI>();
+                MainCanvas.main.Add(_instance.transform);
             }
             return _instance;
         }
     }
 
+    public void Display(PhraseSequence phrase) {
+        GetComponentInChildren<Text>().text = PlayerDataConnector.GetText(phrase);
+    }
+
+    public void Close() {
+        Destroy(gameObject);
+    }
+
     // Use this for initialization
     public void Play(IEnumerable<string> strings) {
-        MainCanvas.main.Add(transform);
         gameObject.AddComponent<UIButton>().OnClicked += TextDisplayUI_OnClicked;
         textList.Clear();
         textList.AddRange(strings);
@@ -27,7 +35,7 @@ public class TextDisplayUI : MonoBehaviour {
     }
 
     void Update() {
-        Refresh();
+        //Refresh();
     }
 
     void Refresh() {
