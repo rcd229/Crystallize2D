@@ -51,6 +51,18 @@ public class Camera2DController : MonoBehaviour {
         Gizmos.DrawLine(c0, c1);
     }
 
+    void OnDrawGizmosSelected() {
+        Gizmos.color = new Color(1f, 0, 0, 0.5f);
+        var b = GetScreenBounds(transform.position);
+        for (float x = b.position.x; x < b.xMax; x += 1f) {
+            Gizmos.DrawLine(new Vector2(x, b.yMin), new Vector2(x, b.yMax));
+        }
+
+        for (float y = b.position.y; y < b.yMax; y += 1f) {
+            Gizmos.DrawLine(new Vector2(b.xMin, y), new Vector2(b.xMax, y));
+        }
+    }
+
     float CameraWidth() {
         return 2f * GetComponent<Camera>().aspect * GetComponent<Camera>().orthographicSize;
     }
