@@ -30,5 +30,9 @@
       <Translation>See you then</Translation>
       <PhraseElements />
     </PhraseSequence>
+    <PhraseSequence>
+      <Translation>What's up</Translation>
+      <PhraseElements />
+    </PhraseSequence>
   </Phrases>
 </PhraseSetGameData>
