@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections; 
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
 public class Loader2D {
-    public static string DirectoryPath
-    {
-        get
-        {
+    public static string DirectoryPath {
+        get {
             return Directory.GetParent(Application.dataPath) + "/CrystallizeData2D/";
         }
     }
 
-    public static string TileDirectoryPath(SpriteLayer layer, string levelname) {
-        string path = Directory.GetParent(Application.dataPath) + "/CrystallizeData2D/" + levelname + "/" + layer + "/";
+    public static string LevelsDirectoryPath {
+        get {
+            return DirectoryPath + "Levels/";
+        }
+    }
 
-        if (!Directory.Exists(path))
-        {
+    public static string TileDirectoryPath(SpriteLayer layer, string levelname) {
+        string path = LevelsDirectoryPath + levelname + "/" + layer + "/";
+
+        if (!Directory.Exists(path)) {
             Directory.CreateDirectory(path);
         }
 
         return path;
-    }
-
-    static Loader2D() {
     }
 }

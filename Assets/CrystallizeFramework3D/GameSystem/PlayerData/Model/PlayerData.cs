@@ -29,6 +29,8 @@ public class PlayerData {
         _instance = playerData;
     }
 
+    public string ID { get; set; }
+
     //public ReviewLog ReviewLog { get; set; }
     public PhraseReviewPlayerData Reviews { get; set; }
     public KanaReviewPlayerData KanaReviews { get; set; }

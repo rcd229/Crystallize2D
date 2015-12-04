@@ -4,7 +4,7 @@
   "Target": "00000000-0000-0000-0000-000000000000",
   "Guid": "8df79d8c-1dd2-4fdd-ac81-8ff61064a6ef",
   "Name": "New Object2D",
-  "PrefabName": "door_0",
+  "PrefabName": "Door",
   "Position": {
     "$type": "SerializableVector2, Assembly-CSharp",
     "x": -14.4175587,

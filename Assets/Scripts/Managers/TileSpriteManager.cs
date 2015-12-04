@@ -90,9 +90,9 @@ public class TileSpriteManager : MonoBehaviour {
         tileInstance.transform.position = position;
 
         //add box collider if tile is in Environment layer so that player cannot walk over this tile
-        if (layer == SpriteLayer.Building || layer == SpriteLayer.Door || layer == SpriteLayer.Environment) {
-            tileInstance.AddComponent<BoxCollider2D>();
-        }
+        //if (layer == SpriteLayer.Building || layer == SpriteLayer.Door || layer == SpriteLayer.Environment) {
+        //    tileInstance.AddComponent<BoxCollider2D>();
+        //}
 
         return tileInstance;
     }

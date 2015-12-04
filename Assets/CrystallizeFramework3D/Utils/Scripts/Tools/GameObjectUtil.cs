@@ -1,9 +1,9 @@
-﻿using UnityEngine; 
+﻿using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using System;
-using System.Collections; 
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,8 +26,11 @@ public static class GameObjectUtil {
     }
 
     public static GameObject GetResourceInstance(string resourcePath) {
-        return GameObject.Instantiate<GameObject>(
-            Resources.Load<GameObject>(resourcePath));
+        var r = Resources.Load<GameObject>(resourcePath);
+        if (r == null) {
+            throw new Exception("Resource not found: " + resourcePath);
+        }
+        return GameObject.Instantiate<GameObject>(r);
     }
 
     public static C GetResourceInstance<C>(string resourcePath) where C : Component {
@@ -48,10 +51,10 @@ public static class GameObjectUtil {
             .GetComponent<C>();
     }
 
-	///require both lists to be none-empty
-	public static List<GameObject> RandomAssignPrefabToTarget(IEnumerable<string> parentNames, IEnumerable<GameObject> prefabSet){
+    ///require both lists to be none-empty
+    public static List<GameObject> RandomAssignPrefabToTarget(IEnumerable<string> parentNames, IEnumerable<GameObject> prefabSet) {
         return RandomAssignInstancesToTargets(parentNames, prefabSet.Select(p => GameObject.Instantiate<GameObject>(p)));
-	}
+    }
 
     public static List<GameObject> RandomAssignInstancesToTargets(IEnumerable<string> parentNames, IEnumerable<GameObject> instanceSet) {
         var parents = parentNames.Randomize();
@@ -96,17 +99,17 @@ public static class GameObjectUtil {
         return null;
     }
 
-	public static C InstantiateAtPlace<C>(string resourcePath, Transform location) where C : Component{
-		GameObject go = GetResourceInstance(resourcePath);
-		PutAtPlace(go, location);
-		return go.GetComponent<C>();
-	}
+    public static C InstantiateAtPlace<C>(string resourcePath, Transform location) where C : Component {
+        GameObject go = GetResourceInstance(resourcePath);
+        PutAtPlace(go, location);
+        return go.GetComponent<C>();
+    }
 
-	public static GameObject InstantiateAtPlace(string resourcePath, Transform location) {
-		GameObject go = GetResourceInstance(resourcePath);
-		PutAtPlace(go, location);
-		return go;
-	}
+    public static GameObject InstantiateAtPlace(string resourcePath, Transform location) {
+        GameObject go = GetResourceInstance(resourcePath);
+        PutAtPlace(go, location);
+        return go;
+    }
 
     public static void SetTransform(this Transform t, Transform other) {
         t.position = other.position;
@@ -118,10 +121,10 @@ public static class GameObjectUtil {
         t.rotation = rotation;
     }
 
-	public static void PutAtPlace(GameObject go, Transform location){
-		go.transform.position = location.position;
-		go.transform.rotation = location.rotation;
-	}
+    public static void PutAtPlace(GameObject go, Transform location) {
+        go.transform.position = location.position;
+        go.transform.rotation = location.rotation;
+    }
 
     public static T NewWithComponent<T>() where T : Component {
         return new GameObject(typeof(T).ToString()).AddComponent<T>();
