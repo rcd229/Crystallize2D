@@ -7,21 +7,36 @@ public class Camera2DController : MonoBehaviour {
     const int HeightUnits = 11;
     const int WidthUnits = 23;
 
-
+    Transform player;
 
     // Use this for initialization
     void Start() {
-
+        player = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
-    void Update() {
-        var bounds = GetBounds();
+    void LateUpdate() {
+        var pos = player.position - Vector3.forward * 10f;
+
+        var camBounds = GetCameraBounds(pos);
+        var screenBounds = GetScreenBounds(pos);
+
+        if (camBounds.xMin < screenBounds.xMin) 
+            pos.x = screenBounds.xMin + camBounds.width * 0.5f;
+        if (camBounds.xMax > screenBounds.xMax) 
+            pos.x = screenBounds.xMax - camBounds.width * 0.5f;
+        if (camBounds.yMin < screenBounds.yMin) 
+            pos.y = screenBounds.yMin + camBounds.height * 0.5f;
+        if (camBounds.yMax > screenBounds.yMax)
+            pos.y = screenBounds.yMax - camBounds.height * 0.5f;
+
+        transform.position = pos;
     }
 
     void OnDrawGizmos() {
         Gizmos.color = Color.blue;
-        var p0 = -0.5f * WidthUnits * Vector3.right + -0.5f * HeightUnits * Vector3.up;
+        //var p0 = -0.5f * WidthUnits * Vector3.right + -0.5f * HeightUnits * Vector3.up;
+        var p0 = (Vector3)GetScreenBounds(transform.position).position;
         var p1 = p0 + WidthUnits * Vector3.right;
         var p2 = p1 + HeightUnits * Vector3.up;
         var p3 = p0 + HeightUnits * Vector3.up;
@@ -34,6 +49,18 @@ public class Camera2DController : MonoBehaviour {
         var c0 = transform.position - 0.5f * CameraWidth() * Vector3.right - 0.5f * CameraHeight() * Vector3.up;
         var c1 = c0 + CameraWidth() * Vector3.right;
         Gizmos.DrawLine(c0, c1);
+    }
+
+    void OnDrawGizmosSelected() {
+        Gizmos.color = new Color(1f, 0, 0, 0.5f);
+        var b = GetScreenBounds(transform.position);
+        for (float x = b.position.x; x < b.xMax; x += 1f) {
+            Gizmos.DrawLine(new Vector2(x, b.yMin), new Vector2(x, b.yMax));
+        }
+
+        for (float y = b.position.y; y < b.yMax; y += 1f) {
+            Gizmos.DrawLine(new Vector2(b.xMin, y), new Vector2(b.xMax, y));
+        }
     }
 
     float CameraWidth() {
@@ -58,10 +85,24 @@ public class Camera2DController : MonoBehaviour {
         return new Rect();
     }
 
-    Rect GetBounds() {
-        var p0 = transform.position - 0.5f * CameraWidth() * Vector3.right - 0.5f * CameraHeight() * Vector3.up;
+    Rect GetCameraBounds(Vector3 center) {
+        var p0 = center - 0.5f * CameraWidth() * Vector3.right - 0.5f * CameraHeight() * Vector3.up;
         var p1 = p0 + CameraWidth() * Vector3.right + CameraHeight() * Vector3.up;
-        return new Rect(p0, p1 - p1);
+        return new Rect(p0, p1 - p0);
+    }
+
+    Rect GetScreenBounds() {
+        return GetScreenBounds(player.position);
+    }
+
+    Rect GetScreenBounds(Vector3 center) { 
+        var p0 = -0.5f * WidthUnits * Vector3.right + -0.5f * HeightUnits * Vector3.up;
+        var playerPos = center - p0;
+        playerPos.x = Mathf.Floor(playerPos.x / WidthUnits);
+        playerPos.y = Mathf.Floor(playerPos.y / HeightUnits);
+        p0 = p0 + playerPos.x * WidthUnits * Vector3.right + playerPos.y * HeightUnits * Vector3.up;
+        var p1 = p0 + WidthUnits * Vector3.right + HeightUnits * Vector3.up;
+        return new Rect(p0, p1 - p0);
     }
 
 }
