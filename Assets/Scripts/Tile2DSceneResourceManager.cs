@@ -47,9 +47,16 @@ public class Tile2DSceneResourceManager : MonoBehaviour {
         //Debug.Log(c + "\n" + s);
     }
 
-    public void createTileAtMousePos(Vector3 mousePos, SpriteLayer layer, int type) {
+    //public void createTileAtMousePos(Vector3 mousePos, SpriteLayer layer, int type) {
+    //    var tileInstance = TileSpriteManager.Instance.GetInstance(type, layer, mousePos);
+    //    currentLevel.layers[layer].SetValue(Vector2int.FromVector2(mousePos), (byte)(type + 1));
+    //    resources.Add(tileInstance);
+    //}
+
+    public void createTileAtMousePos(Vector3 mousePos, SpriteLayer layer, string type) {
         var tileInstance = TileSpriteManager.Instance.GetInstance(type, layer, mousePos);
-        currentLevel.layers[layer].SetValue(Vector2int.FromVector2(mousePos), (byte)(type + 1));
+        int id = TileSpriteManager.Instance.GetIDForName(type, layer) + 1;
+        currentLevel.layers[layer].SetValue(Vector2int.FromVector2(mousePos), (byte)(id + 1));
         resources.Add(tileInstance);
     }
 

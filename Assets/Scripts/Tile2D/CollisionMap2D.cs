@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Util;
 
-public class CollisionMap2D {
+public class CollisionMap2D : MonoBehaviour {
 
     static CollisionMap2D _instance;
     public static CollisionMap2D Instance {
         get {
-            if(_instance == null) {
-                _instance = new CollisionMap2D();
+            if(!_instance) {
+                _instance = new GameObject("CollisionMap").AddComponent<CollisionMap2D>();
             }
             return _instance;
         }
@@ -28,6 +28,12 @@ public class CollisionMap2D {
             _prefab = Resources.Load<GameObject>(ColliderPrefab);
         }
         return _prefab;
+    }
+
+    public void SetVisualsEnabled(bool enabled) {
+        foreach(var r in GetComponentsInChildren<Renderer>()) {
+            r.enabled = enabled;
+        }
     }
 
     public void Refresh() {
@@ -70,7 +76,7 @@ public class CollisionMap2D {
                 var r = GameObject.Instantiate(GetPrefab());
                 resources[pos] = r;
                 r.transform.position = pos.ToVector2() * TileSize + Offset;
-                TransformPath.Add(r.transform, "Colliders");
+                r.transform.parent = transform;
             }
         }
     }

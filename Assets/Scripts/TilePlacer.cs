@@ -7,42 +7,39 @@ using System.Linq;
 public class TilePlacer : MonoBehaviour {
 
     private GameObject tile;
-    private int type;
+    //private int type;
+    private string type;
     private SpriteLayer layer;
     public static TilePlacer placer;
 
+    private int _index;
+    private int Index {
+        get { return _index; }
+        set {
+            _index = value;
+            type = TileSpriteManager.Instance.GetNameForIndex(_index, layer);
+        }
+    }
 
-    void Awake()
-    {
+    void Awake() {
         placer = this;
     }
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         layer = (SpriteLayer)0;
-        type = 0;
+        Index = 0;
+
+        CollisionMap2D.Instance.SetVisualsEnabled(true);
     }
 
-    //void SwitchLevel()
-    //{
-    //    if (Tile2DInitializer.Instance.currentLevel == GameLevel2D.DefaultLevel)
-    //    {
-    //        Tile2DInitializer.Instance.LoadLevel(GameLevel2D.TestLevel);
-    //    }
-    //    else
-    //    {
-    //        Tile2DInitializer.Instance.LoadLevel(GameLevel2D.DefaultLevel);
-    //    } 
-    //}
-
     // Update is called once per frame
-    void Update () {
+    void Update() {
         tileCreateDestroy();
-	}
+    }
 
     //place tile onscreen
-    void tileCreateDestroy()
-    {
+    void tileCreateDestroy() {
 
         var mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -50,10 +47,9 @@ public class TilePlacer : MonoBehaviour {
         mousePos.x = Mathf.RoundToInt(mousePos.x);
         mousePos.y = Mathf.RoundToInt(mousePos.y);
 
-        var tListLength = TileSpriteManager.Instance.GetListLength((int)layer);
+        var tListLength = TileSpriteManager.Instance.GetListLength(layer);
 
-        if (Input.GetMouseButtonDown(0) && !UIUtil.MouseOverUI())
-        {
+        if (Input.GetMouseButtonDown(0) && !UIUtil.MouseOverUI()) {
             Tile2DSceneResourceManager.Instance.createTileAtMousePos(mousePos, layer, type);
         }
 
@@ -62,27 +58,24 @@ public class TilePlacer : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Tab)) {
-            type = (type + 1) % tListLength;
+            Index = (Index + 1) % tListLength;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            type = (type - 1) % tListLength;
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            Index = (Index - 1) % tListLength;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            type = 0;
             layer = (SpriteLayer)(((int)layer + 1) % 4);
+            Index = 0;
         }
     }
 
-    public SpriteLayer getLayer()
-    {
+    public SpriteLayer getLayer() {
         return layer;
     }
 
-    public void setType(int t)
-    {
+    public void SetType(string t) {
         type = t;
     }
 }

@@ -4,11 +4,40 @@
   <Phrases>
     <PhraseSequence>
       <Translation>Hi there.</Translation>
-      <PhraseElements />
+      <PhraseElements>
+        <PhraseSequenceElement>
+          <WordID>1289400</WordID>
+          <FormID>0</FormID>
+          <Tags />
+        </PhraseSequenceElement>
+      </PhraseElements>
     </PhraseSequence>
     <PhraseSequence>
       <Translation>What do you need?</Translation>
-      <PhraseElements />
+      <PhraseElements>
+        <PhraseSequenceElement>
+          <WordID>1577100</WordID>
+          <FormID>1</FormID>
+          <Tags />
+        </PhraseSequenceElement>
+        <PhraseSequenceElement>
+          <WordID>2089020</WordID>
+          <FormID>110</FormID>
+          <Tags />
+        </PhraseSequenceElement>
+        <PhraseSequenceElement>
+          <WordID>2028970</WordID>
+          <FormID>0</FormID>
+          <Tags />
+        </PhraseSequenceElement>
+        <PhraseSequenceElement>
+          <WordID>101</WordID>
+          <FormID>0</FormID>
+          <Text>?</Text>
+          <RomajiText>?</RomajiText>
+          <Tags />
+        </PhraseSequenceElement>
+      </PhraseElements>
     </PhraseSequence>
     <PhraseSequence>
       <Translation>Hi there</Translation>

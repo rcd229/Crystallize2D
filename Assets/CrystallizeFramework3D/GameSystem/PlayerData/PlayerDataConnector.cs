@@ -119,7 +119,7 @@ public class PlayerDataConnector {
             return PlayerData.Instance.WordCollection.ContainsFoundWord(phrase.Word);
         } else {
             //Debug.Log("p: " + phrase.GetText() + ": " + PlayerData.Instance.PhraseStorage.ContainsPhrase(phrase));
-            return PlayerData.Instance.PhraseStorage.ContainsPhrase(phrase);
+            return PlayerData.Instance.PhraseCollection.ContainsPhrase(phrase);
         }
     }
 
@@ -215,10 +215,10 @@ public class PlayerDataConnector {
             //Debug.Log("collected word: " + item.GetText());
             AddConfidence(1);
         } else {
-            if (PlayerData.Instance.PhraseStorage.ContainsPhrase(item)) {
+            if (PlayerData.Instance.PhraseCollection.ContainsPhrase(item)) {
                 return;
             }
-            PlayerData.Instance.PhraseStorage.AddPhrase(item);
+            PlayerData.Instance.PhraseCollection.AddPhrase(item);
             //Debug.Log("collected phrase: " + item.GetText());
             AddConfidence(1);
         }

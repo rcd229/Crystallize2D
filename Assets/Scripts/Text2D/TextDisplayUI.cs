@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 [ResourcePath("UI/TextDisplayImage")]
 public class TextDisplayUI : MonoBehaviour {
-    List<string> textList = new List<string>();
-    int index = 0;
     static TextDisplayUI _instance;
     public static TextDisplayUI Instance {
         get {
@@ -18,8 +16,22 @@ public class TextDisplayUI : MonoBehaviour {
         }
     }
 
+
+    //List<string> textList = new List<string>();
+    //int index = 0;
+    public GameObject phrasePrefab;
+
+    GameObject phraseInstance;
+
     public void Display(PhraseSequence phrase) {
-        GetComponentInChildren<Text>().text = PlayerDataConnector.GetText(phrase);
+        //GetComponentInChildren<Text>().text = PlayerDataConnector.GetText(phrase);
+        if (phraseInstance) {
+            Destroy(phraseInstance);
+        }
+
+        phraseInstance = Instantiate(phrasePrefab);
+        phraseInstance.GetInterface<IInitializable<PhraseSequence>>().Initialize(phrase);
+        phraseInstance.transform.SetParent(transform, false);
     }
 
     public void Close() {
@@ -27,27 +39,27 @@ public class TextDisplayUI : MonoBehaviour {
     }
 
     // Use this for initialization
-    public void Play(IEnumerable<string> strings) {
-        gameObject.AddComponent<UIButton>().OnClicked += TextDisplayUI_OnClicked;
-        textList.Clear();
-        textList.AddRange(strings);
-        Refresh();
-    }
+    //public void Play(IEnumerable<string> strings) {
+    //    gameObject.AddComponent<UIButton>().OnClicked += TextDisplayUI_OnClicked;
+    //    textList.Clear();
+    //    textList.AddRange(strings);
+    //    Refresh();
+    //}
 
-    void Update() {
-        //Refresh();
-    }
+    //void Update() {
+    //    //Refresh();
+    //}
 
-    void Refresh() {
-        if (index < textList.Count) {
-            GetComponentInChildren<Text>().text = textList[index];
-        } else {
-            Destroy(gameObject);
-        }
-    }
+    //void Refresh() {
+    //    if (index < textList.Count) {
+    //        GetComponentInChildren<Text>().text = textList[index];
+    //    } else {
+    //        Destroy(gameObject);
+    //    }
+    //}
 
-    private void TextDisplayUI_OnClicked(object sender, EventArgs<UnityEngine.EventSystems.PointerEventData> e) {
-        index++;
-        Refresh();
-    }
+    //private void TextDisplayUI_OnClicked(object sender, EventArgs<UnityEngine.EventSystems.PointerEventData> e) {
+    //    index++;
+    //    Refresh();
+    //}
 }

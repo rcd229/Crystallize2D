@@ -8,6 +8,14 @@ public class Interaction2DController : MonoBehaviour
 {
     float camRayLength = 100f;
 
+    void Awake() {
+        MainCanvas.main.Add(transform);
+    }
+
+    void Start() {
+        CollisionMap2D.Instance.SetVisualsEnabled(false);
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))

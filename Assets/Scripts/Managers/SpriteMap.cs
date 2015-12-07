@@ -28,6 +28,18 @@ public class SpriteMap {
         }
     }
 
+    public int GetOrCreateIndex(string name) {
+        if (!map.Contains2(name)) {
+            for(int i = 0; true; i++) {
+                if (!map.Contains1(i)) {
+                    map.Add(i, name);
+                    break;
+                }
+            }
+        }
+        return GetIndex(name);
+    }
+
     public int GetIndex(string name) {
         if (map.Contains2(name)) {
             return map.Reverse[name];

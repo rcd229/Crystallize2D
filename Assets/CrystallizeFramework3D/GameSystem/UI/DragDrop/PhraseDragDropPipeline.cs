@@ -30,7 +30,8 @@ public class PhraseDragDropPipeline {
 
         IsDragging = true;
         var instance = GameObject.Instantiate(prefab);
-        instance.AddComponent<DraggedPhrase>().Initialize(phrase, position);
+        Debug.Log(instance);
+        instance.GetOrAddComponent<DraggedPhrase>().Initialize(phrase, position);
         instance.GetOrAddComponent<CanvasGroup>().interactable = false;
         instance.GetOrAddComponent<CanvasGroup>().blocksRaycasts = false;
         return instance;
