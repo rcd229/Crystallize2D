@@ -1,0 +1,12 @@
+{
+  "$type": "NPC2D, Assembly-CSharp",
+  "DialogueKey": "System.MonoType:StoreFrontGirl",
+  "Guid": "3e4d7701-e2cd-4818-a904-b3be107e76bf",
+  "Name": "StoreFrontGirl",
+  "PrefabName": "NPC1",
+  "Position": {
+    "$type": "SerializableVector2, Assembly-CSharp",
+    "x": -3.07449484,
+    "y": 0.339709371
+  }
+}

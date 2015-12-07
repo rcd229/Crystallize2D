@@ -1,0 +1,12 @@
+{
+  "$type": "NPC2D, Assembly-CSharp",
+  "DialogueKey": "System.MonoType:MapGuy",
+  "Guid": "73d7be5a-cbbd-45b1-aea8-4b6cabb12171",
+  "Name": "Map Guy",
+  "PrefabName": "NPC6",
+  "Position": {
+    "$type": "SerializableVector2, Assembly-CSharp",
+    "x": 7.467158,
+    "y": -3.733553
+  }
+}

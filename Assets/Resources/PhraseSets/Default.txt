@@ -63,5 +63,73 @@
       <Translation>What's up</Translation>
       <PhraseElements />
     </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Hi!</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>This is the store.</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>You can buy items here such as clothes and food.</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Wait!</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Do you have a map?</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Yes!</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>No</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Great! Now you can travel. Good luck!</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>You need a map in order to travel.</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Hey! Do you want me to show you the town?</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Sure</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Ok then. Goodbye.</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>Cool. Follow me!</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>This is the school. You can come here to review the words you've learned and talk to other students.</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>This is the store. You can buy useful things here.</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>And this is my house.</Translation>
+      <PhraseElements />
+    </PhraseSequence>
+    <PhraseSequence>
+      <Translation>That's everything! Thanks for going on my tour. You seem adventurous. Here's a map to help you out!</Translation>
+      <PhraseElements />
+    </PhraseSequence>
   </Phrases>
 </PhraseSetGameData>

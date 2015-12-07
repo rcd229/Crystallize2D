@@ -1,0 +1,11 @@
+{
+  "$type": "Object2D, Assembly-CSharp",
+  "Guid": "a01592f3-4559-4458-b147-7f122d5f6199",
+  "Name": "New Object2D",
+  "PrefabName": "NPC1",
+  "Position": {
+    "$type": "SerializableVector2, Assembly-CSharp",
+    "x": -19.9572239,
+    "y": 1.03773594
+  }
+}
