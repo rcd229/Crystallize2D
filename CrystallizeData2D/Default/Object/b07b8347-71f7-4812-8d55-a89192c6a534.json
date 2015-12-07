@@ -1,0 +1,12 @@
+{
+  "$type": "NPC2D, Assembly-CSharp",
+  "DialogueKey": "System.MonoType:PathGuy",
+  "Guid": "b07b8347-71f7-4812-8d55-a89192c6a534",
+  "Name": "Path Guy",
+  "PrefabName": "NPC3",
+  "Position": {
+    "$type": "SerializableVector2, Assembly-CSharp",
+    "x": -11.2887516,
+    "y": -0.0208075643
+  }
+}

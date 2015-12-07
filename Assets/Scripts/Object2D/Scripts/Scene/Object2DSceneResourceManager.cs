@@ -115,7 +115,7 @@ public class Object2DSceneResourceManager : MonoBehaviour {
         }
 
         if (obj is IHasCollider) {
-            baseObject.AddComponent<BoxCollider2D>();
+            graphicObject.AddComponent<BoxCollider2D>();
         }
 
         if (Object2DBehaviourMap.Instance.HasTypeFor(obj.GetType())) {

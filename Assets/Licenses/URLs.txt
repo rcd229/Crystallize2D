@@ -7,3 +7,5 @@ http://opengameart.org/content/alternate-lpc-character-sprites-george
 http://opengameart.org/content/one-more-lpc-alternate-character
 http://opengameart.org/content/house-building-kit
 http://opengameart.org/content/orthographic-outdoor-tiles
+
+http://opengameart.org/content/24x32-characters-with-faces-big-pack
