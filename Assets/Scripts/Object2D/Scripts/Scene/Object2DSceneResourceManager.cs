@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections; 
+using System.Collections;
 using System.Collections.Generic;
 using Util;
 
 public class Object2DSceneResourceManager : MonoBehaviour {
     const string Object2DBasePrefab = "Object2DBase";
     const string Object2DPrefabsDirectory = "Object2DPrefabs/";
+
+    float gridSize = 0.5f;
 
     string _stage {
         get {
@@ -31,7 +33,7 @@ public class Object2DSceneResourceManager : MonoBehaviour {
     }
 
     public void LoadLevel(GameLevel2D level) {
-        foreach(var r in resources.Values) {
+        foreach (var r in resources.Values) {
             Destroy(r);
         }
         resources = new Dictionary<Vector2int, GameObject>();
@@ -87,13 +89,21 @@ public class Object2DSceneResourceManager : MonoBehaviour {
 
     public void LoadAll(string level) {
         var objects = Object2DLoader.LoadAll(level);
-        foreach(var obj in objects) {
+        foreach (var obj in objects) {
             Place(obj);
+
+            if (obj is SceneChangeTrigger2D) {
+                var p = Vector2int.Snap(((Vector2)obj.Position) * 2f) + Vector2int.One;
+                CollisionMap2D.Instance.SetValue(p, 0, false);
+                CollisionMap2D.Instance.SetValue(p + Vector2int.Right,0, false);
+                CollisionMap2D.Instance.SetValue(p + Vector2int.Up, 0, false);
+                CollisionMap2D.Instance.SetValue(p + Vector2int.One, 0, false);
+            }
         }
     }
 
     public void UnloadAll() {
-        foreach(var r in resources) {
+        foreach (var r in resources) {
             Destroy(r.Value);
         }
         resources.Clear();
@@ -109,10 +119,10 @@ public class Object2DSceneResourceManager : MonoBehaviour {
         graphicObject.transform.SetParent(baseObject.transform);
         graphicObject.transform.localPosition = Vector3.zero;
 
-        if (obj is IHasTrigger) {
-            var c = baseObject.AddComponent<BoxCollider2D>();
-            c.isTrigger = true;
-        }
+        //if (obj is IHasTrigger) {
+        //    var c = baseObject.AddComponent<BoxCollider2D>();
+        //    c.isTrigger = true;
+        //}
 
         if (obj is IHasCollider) {
             graphicObject.AddComponent<BoxCollider2D>();
@@ -130,11 +140,11 @@ public class Object2DSceneResourceManager : MonoBehaviour {
     }
 
     public Vector2 GetWorldPosition(Vector2int pos) {
-        return pos.ToVector2();
+        return pos.ToVector2() * gridSize;
     }
 
     public Vector2int GetGridPosition(Vector2 pos) {
-        return Vector2int.Snap(pos);
+        return Vector2int.Snap(pos / gridSize);
     }
-   
+
 }

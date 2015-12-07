@@ -2,12 +2,12 @@
   "$type": "SceneChangeTrigger2D, Assembly-CSharp",
   "Scene": "TestLevel",
   "Target": "00000000-0000-0000-0000-000000000000",
-  "Guid": "8a18df37-f882-4d25-bac5-9f632a7b55b3",
-  "Name": "Store1",
+  "Guid": "e0e44a8c-308c-4331-9be4-55cacb0a4c62",
+  "Name": "New Object2D",
   "PrefabName": "door_shiftLeft",
   "Position": {
     "$type": "SerializableVector2, Assembly-CSharp",
-    "x": -4.736984,
-    "y": 0.989905357
+    "x": -16.9051247,
+    "y": -0.1690137
   }
 }

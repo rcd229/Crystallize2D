@@ -16,6 +16,7 @@ public class DraggedPhrase: MonoBehaviour {
         MainCanvas.main.Add(transform);
         this.phrase = phrase;
         transform.position = position;
+        GetComponentInChildren<Text>().text = PlayerDataConnector.GetText(phrase);
     }
 
     void Update() {
@@ -32,8 +33,8 @@ public class DraggedPhrase: MonoBehaviour {
                 if(dropAreas.Length > 0) {
                     foreach (var a in dropAreas) {
                         a.AcceptDrop(phrase, gameObject);
-                        Exit(true);
                     }
+                    Exit(true);
                     return;
                 }
             }

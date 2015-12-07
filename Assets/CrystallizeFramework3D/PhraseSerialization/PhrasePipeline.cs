@@ -13,10 +13,6 @@ public class PhrasePipeline {
     }
 
     public static PhraseSequence GetPhrase(string setKey, string phraseKey, bool isTest) {
-        if (isTest) {
-            return new PhraseSequence(phraseKey);
-        }
-
         var key = phraseKey.ToLower();
         //Debug.Log("Adding: " + setKey + "; " + key + "; " + isTest);
         if (phrases.ContainsKey(key)) {
@@ -30,8 +26,12 @@ public class PhrasePipeline {
             }
             PhraseSets[key].Add(phraseKey);
 
-            phrases[key] = p;
-            return p;
+            if ((p == null || p.PhraseElements.Count == 0) && isTest) {
+                return new PhraseSequence(phraseKey);
+            } else {
+                phrases[key] = p;
+                return p;
+            }
         }
     }
 }

@@ -115,7 +115,7 @@ MonoBehaviour:
   prefabs:
   - {fileID: 115462, guid: 9eecb1224f0dcde4684af1b809bdab09, type: 2}
   - {fileID: 191558, guid: 58658081524f1794fac7cf7b676c9d68, type: 2}
-  - {fileID: 160056, guid: dee80238effca9c46b5a8fb6797761e7, type: 2}
+  - {fileID: 174200, guid: cefb7e70edf464644a9ec7935240b490, type: 2}
 --- !u!4 &65935076
 Transform:
   m_ObjectHideFlags: 0
@@ -341,9 +341,9 @@ GameObject:
   - 4: {fileID: 218118786}
   - 212: {fileID: 218118785}
   - 50: {fileID: 218118789}
-  - 61: {fileID: 218118788}
   - 95: {fileID: 218118790}
   - 114: {fileID: 218118787}
+  - 58: {fileID: 218118788}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -369,7 +369,9 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -401,9 +403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2acc741303ea57a47b519d8ecf458ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
---- !u!61 &218118788
-BoxCollider2D:
+  speed: 3
+--- !u!58 &218118788
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -412,9 +414,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -.0500000007}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .600000024, y: .600000024}
+  m_Radius: .49000001
 --- !u!50 &218118789
 Rigidbody2D:
   serializedVersion: 2

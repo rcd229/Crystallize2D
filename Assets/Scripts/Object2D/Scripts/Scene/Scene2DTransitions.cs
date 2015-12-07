@@ -36,7 +36,7 @@ public class Scene2DTransitions : MonoBehaviour
         //disable character controls
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         player.GetComponent<PlayerMovement2D>().enabled = false;
-        player.GetComponent<BoxCollider2D>().enabled = false;
+        player.GetComponent<Collider2D>().enabled = false;
 
         //start fade out
         BlackScreenUI.GetInstance().Initialize(0.5f,0.1f,0.5f);
@@ -47,7 +47,7 @@ public class Scene2DTransitions : MonoBehaviour
             player.transform.position += Vector3.up * Time.deltaTime;
             yield return null;
         }
-        player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<Collider2D>().enabled = true;
         if (target != null)
         {
             player.transform.position = (Vector2)target.Position;
@@ -57,8 +57,7 @@ public class Scene2DTransitions : MonoBehaviour
         //start blackout
         GameLevel2DSceneResourceManager.LoadLevel(GameLevel2D.GetGameLevel(trigger.Scene));
         player.GetComponent<PlayerMovement2D>().enabled = true;
-        player.GetComponent<BoxCollider2D>().enabled = true;
-
+        player.GetComponent<Collider2D>().enabled = true;
     }
 
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class PlayerData {
 
@@ -29,13 +30,16 @@ public class PlayerData {
         _instance = playerData;
     }
 
+    public string ID { get; set; }
+
     //public ReviewLog ReviewLog { get; set; }
     public PhraseReviewPlayerData Reviews { get; set; }
     public KanaReviewPlayerData KanaReviews { get; set; }
 
     public PersonalPlayerData PersonalData { get; set; }
+    public WordInventory Inventory { get; set; }
     public WordCollectionPlayerData WordCollection { get; set; }
-    public PhraseCollectionPlayerData PhraseStorage { get; set; }
+    public PhraseCollectionPlayerData PhraseCollection { get; set; }
     //public ItemInventoryPlayerData ItemInventory { get; set; }
     public TutorialPlayerData Tutorial { get; set; }
     //public LocationPlayerData Location { get; set; }
@@ -48,17 +52,24 @@ public class PlayerData {
     public SessionPlayerData Session { get; set; }
     //public NPCPlayerData NPCData { get; set; }
     public int Money { get; set; }
-	//public QuestPlayerData QuestData{get;set;}
-	//public UIPlayerData UIData{get;set;}
+    //public QuestPlayerData QuestData{get;set;}
+    //public UIPlayerData UIData{get;set;}
 
     public JapaneseTools.JapaneseScriptType ScriptType { get; set; }
+
+
+    public event EventHandler OnDataChanged;
 
     public PlayerData() {
         Reviews = new PhraseReviewPlayerData();
         KanaReviews = new KanaReviewPlayerData();
         PersonalData = new PersonalPlayerData();
-        //WordStorage = new WordCollectionPlayerData();
-        //PhraseStorage = new PhraseCollectionPlayerData();
+
+        Inventory = new WordInventory();
+        Inventory.DataChanged += Inventory_DataChanged;
+
+        WordCollection = new WordCollectionPlayerData();
+        PhraseCollection = new PhraseCollectionPlayerData();
         //ItemInventory = new ItemInventoryPlayerData();
         //Tutorial = new TutorialPlayerData();
         //Location = new LocationPlayerData();
@@ -70,9 +81,12 @@ public class PlayerData {
         Session = new SessionPlayerData();
         //Appearance = new AppearancePlayerData();
         ScriptType = (JapaneseTools.JapaneseScriptType)GameSettings.Instance.TextMode;
-  //      NPCData = new NPCPlayerData();
-		//QuestData = new QuestPlayerData();
-		//UIData = new UIPlayerData();
+        //      NPCData = new NPCPlayerData();
+        //QuestData = new QuestPlayerData();
+        //UIData = new UIPlayerData();
     }
 
+    private void Inventory_DataChanged(object sender, EventArgs e) {
+        OnDataChanged.Raise(sender, e);
+    }
 }

@@ -7,8 +7,7 @@ using Newtonsoft.Json;
 using Util.Serialization;
 using System.Linq;
 
-public class Object2DLoader {
-    public static string DirectoryPath { get { return Directory.GetParent(Application.dataPath) + "/CrystallizeData2D/"; } }
+public class Object2DLoader : Loader2D {
     public static string LocalDirectoryPath { get { return "Object/"; } }
 
     static JsonSerializerSettings settings = new JsonSerializerSettings();
@@ -26,7 +25,7 @@ public class Object2DLoader {
     }
 
     protected static string GetDirectoryPath(string stage) {
-        return DirectoryPath + stage + "/" + LocalDirectoryPath;
+        return LevelsDirectoryPath + stage + "/" + LocalDirectoryPath;
     }
 
     public static void Save(string stage, Object2D obj) {

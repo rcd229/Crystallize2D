@@ -26,13 +26,18 @@ public class TileMap2D {
     public SpriteLayer layer;
     public string levelname;
 
-    public TileMap2D() {
+    public bool AutoSave { get; set; }
+
+    public TileMap2D(bool autoSave = true) {
+        AutoSave = autoSave;
     }
 
-    public TileMap2D(SpriteLayer ly, string ln) {
+    public TileMap2D(SpriteLayer ly, string ln, bool autoSave = true) : this(autoSave) {
         levelname = ln;
         layer = ly;
-        maps = MapLoader2D.LoadAll(layer, levelname);
+        if (AutoSave) {
+            maps = MapLoader2D.LoadAll(layer, levelname);
+        }
     }
 
     public IEnumerable<Vector2int> GetPositions(Vector2int areaPosition) {
@@ -62,10 +67,20 @@ public class TileMap2D {
         return positions;
     }
 
+    public byte GetValue(Vector2int position) {
+        if (!maps.ContainsKey(GetReducedPoint(position))) {
+            return 0;
+        } else {
+            return maps[GetReducedPoint(position)][GetLocalPosition(position)];
+        }
+    }
+
     public void SetValue(Vector2int position, byte value) {
         var map = GetMap(position);
         map[GetLocalPosition(position)] = value;
-        MapLoader2D.Save(GetReducedPoint(position), map, layer, levelname);
+        if (AutoSave) {
+            MapLoader2D.Save(GetReducedPoint(position), map, layer, levelname);
+        }
     }
 
     byte[] GetMap(Vector2int point) {
@@ -74,13 +89,15 @@ public class TileMap2D {
 
     byte[] GetMapFromReducedPoint(Vector2int reducedPoint) {
         if (!maps.ContainsKey(reducedPoint)) {
-            var m = MapLoader2D.Load(reducedPoint, layer, levelname);
+            byte[] m = null;
+            if (AutoSave) {
+                m = MapLoader2D.Load(reducedPoint, layer, levelname);
+            }
             if (m == null) {
                 maps[reducedPoint] = new byte[MapSize * MapSize];
-                var newMap = maps[reducedPoint];
-                for (int i = 0; i < newMap.Length; i++) { newMap[i] = 0; }
-            }
-            else {
+                //var newMap = maps[reducedPoint];
+                //for (int i = 0; i < newMap.Length; i++) { newMap[i] = 0; }
+            } else {
                 maps[reducedPoint] = m;
             }
         }
