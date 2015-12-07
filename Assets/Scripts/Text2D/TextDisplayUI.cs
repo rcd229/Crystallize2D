@@ -25,10 +25,8 @@ public class TextDisplayUI : MonoBehaviour {
     GameObject phraseInstance;
 
     public void Display(PhraseSequence phrase) {
-<<<<<<< HEAD
         open = true;
         GetComponentInChildren<Text>().text = PlayerDataConnector.GetText(phrase);
-=======
         //GetComponentInChildren<Text>().text = PlayerDataConnector.GetText(phrase);
         if (phraseInstance) {
             Destroy(phraseInstance);
@@ -37,7 +35,6 @@ public class TextDisplayUI : MonoBehaviour {
         phraseInstance = Instantiate(phrasePrefab);
         phraseInstance.GetInterface<IInitializable<PhraseSequence>>().Initialize(phrase);
         phraseInstance.transform.SetParent(transform, false);
->>>>>>> ad04baa7d04f00300aee11eb3b3868cec8027450
     }
 
     public void Close() {
