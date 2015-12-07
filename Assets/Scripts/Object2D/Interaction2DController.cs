@@ -10,7 +10,7 @@ public class Interaction2DController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !TextDisplayUI.open)
         {
             //Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
@@ -22,10 +22,23 @@ public class Interaction2DController : MonoBehaviour
 
             if (hit.transform)
             {
-                IInteractable2D[] intrfaces = hit.transform.gameObject.GetInterfacesInChildren<IInteractable2D>();
-                foreach (IInteractable2D i in intrfaces) {
-                    i.Interact();
+                if (hit.transform.parent)
+                {
+                    IInteractable2D[] intrfaces = hit.transform.parent.gameObject.GetInterfacesInChildren<IInteractable2D>();
+                    foreach (IInteractable2D i in intrfaces)
+                    {
+                        i.Interact();
+                    }
                 }
+                else
+                {
+                    IInteractable2D[] intrfaces = hit.transform.gameObject.GetInterfacesInChildren<IInteractable2D>();
+                    foreach (IInteractable2D i in intrfaces)
+                    {
+                        i.Interact();
+                    }
+                }
+                
             }
 
         }

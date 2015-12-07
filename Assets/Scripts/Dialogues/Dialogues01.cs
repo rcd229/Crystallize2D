@@ -29,7 +29,7 @@ public class Dialogues01 : ContainsDialogueBase {
         get
         {
             return BuildDialogue(
-                false,
+                IsTest,
                 Line("What's up"),
                 Line("What do you need?"),
                 Branch(
@@ -48,13 +48,12 @@ public class Dialogues01 : ContainsDialogueBase {
         get
         {
             return BuildDialogue(
-                false,
+                IsTest,
                 Line("Hi!"),
                 Line("This is the store."),
                 Line("You can buy items here such as clothes and food.")
                 );
         }
-
     }
 
     public static DialogueSequence PathGuy
@@ -62,7 +61,7 @@ public class Dialogues01 : ContainsDialogueBase {
         get
         {
             return BuildDialogue(
-                false,
+                IsTest,
                 Line("Wait!"),
                 Line("Do you have a map?"),
                 Branch(
@@ -81,7 +80,7 @@ public class Dialogues01 : ContainsDialogueBase {
         get
         {
             return BuildDialogue(
-                false,
+                IsTest,
                 Line("Hey! Do you want me to show you the town?"),
                 Branch(
                     Prompted("No", Line("Ok then. Goodbye.")),

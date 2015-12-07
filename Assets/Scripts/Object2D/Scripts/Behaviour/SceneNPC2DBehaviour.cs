@@ -13,6 +13,7 @@ public class SceneNPC2DBehaviour : MonoBehaviour, IInteractable2D
         //strings.Add("...lol...");
         var npc = (NPC2D)GetComponent<Object2DComponent>().Object;
         //TextDisplayUI.Instance.Play(npc.Dialogue.Description.Split('\n'));
+        Debug.Log(npc.DialogueKey);
         new PlayDialogueProcess().Initialize(
             new PlayDialogueContext(DialoguePipeline.GetDialogue(npc.DialogueKey), gameObject)
             );

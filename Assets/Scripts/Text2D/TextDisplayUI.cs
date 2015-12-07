@@ -8,6 +8,7 @@ public class TextDisplayUI : MonoBehaviour {
     List<string> textList = new List<string>();
     int index = 0;
     static TextDisplayUI _instance;
+    public static bool open = false; //make other options for this
     public static TextDisplayUI Instance {
         get {
             if (!_instance) {
@@ -19,11 +20,13 @@ public class TextDisplayUI : MonoBehaviour {
     }
 
     public void Display(PhraseSequence phrase) {
+        open = true;
         GetComponentInChildren<Text>().text = PlayerDataConnector.GetText(phrase);
     }
 
     public void Close() {
         Destroy(gameObject);
+        open = false;
     }
 
     // Use this for initialization
